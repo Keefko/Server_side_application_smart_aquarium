@@ -12,7 +12,7 @@
 	<artifactId>smartaquarium</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>smartaquarium</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Server application for Smart Aquarium</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -26,15 +26,10 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
@@ -50,7 +45,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
-
+	<packaging>war</packaging>
 	<build>
 		<plugins>
 			<plugin>
@@ -59,5 +54,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

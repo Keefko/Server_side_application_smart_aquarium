@@ -1,5 +1,8 @@
 package com.bachelor.smartaquarium.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -15,10 +18,15 @@ public class Aquarium {
     @Column(name = "user_id")
     private int userId;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "create_time")
+    @CreationTimestamp
     private Timestamp createTime;
 
     @Column(name = "update_time")
+    @UpdateTimestamp
     private Timestamp updateTime;
 
     @Column (name = "type")
@@ -26,14 +34,6 @@ public class Aquarium {
 
     @Column(name = "status")
     private int status;
-
-    public Aquarium(int userId,Timestamp createTime, Timestamp updateTime, int type, int status) {
-       this.userId = userId;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-        this.type = type;
-        this.status = status;
-    }
 
     public int getId() {
         return id;
@@ -77,6 +77,14 @@ public class Aquarium {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

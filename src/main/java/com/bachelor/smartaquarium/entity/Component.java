@@ -1,5 +1,4 @@
 package com.bachelor.smartaquarium.entity;
-
 import javax.persistence.*;
 
 @Entity
@@ -24,7 +23,6 @@ public class Component {
         this.actionId = actionId;
         this.name = name;
     }
-
 
     public int getId() {
         return id;

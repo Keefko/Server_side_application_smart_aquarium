@@ -2,14 +2,12 @@ package com.bachelor.smartaquarium;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class SmartaquariumApplication extends SpringBootServletInitializer {
+public class SmartaquariumApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmartaquariumApplication.class, args);
 	}
-
 
 }

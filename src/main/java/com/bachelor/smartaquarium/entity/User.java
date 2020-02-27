@@ -19,10 +19,10 @@ public class User {
     @Column(name="email")
     private String email;
 
-    public User(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
+    @Column(name = "aquarium_id")
+    private int aquariumID;
+
+    public User() {
     }
 
     public int getId() {
@@ -55,5 +55,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAquariumID() {
+        return aquariumID;
+    }
+
+    public void setAquariumID(int aquariumID) {
+        this.aquariumID = aquariumID;
     }
 }

@@ -25,11 +25,8 @@ public class Measuraments {
     private Timestamp createTime;
 
 
-    public Measuraments(int aquariumId, int typeId, int dataId, Timestamp createTime) {
-        this.aquariumId = aquariumId;
-        this.typeId = typeId;
-        this.dataId = dataId;
-        this.createTime = createTime;
+    public Measuraments() {
+
     }
 
     public int getId() {

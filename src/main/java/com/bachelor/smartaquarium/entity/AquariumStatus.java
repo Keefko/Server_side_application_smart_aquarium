@@ -16,9 +16,7 @@ public class AquariumStatus {
     @Column(name = "status")
     private String status;
 
-    public AquariumStatus(String status) {
-        this.status = status;
-    }
+    public AquariumStatus() {}
 
     public int getId() {
         return id;

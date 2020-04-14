@@ -16,7 +16,8 @@ public class AquariumType {
     private String type;
 
 
-    public AquariumType() {
+    public AquariumType(String type) {
+        this.type = type;
     }
 
     public int getId() {

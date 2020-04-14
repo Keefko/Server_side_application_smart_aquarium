@@ -24,9 +24,11 @@ public class Measuraments {
     @Column(name = "create_time")
     private Timestamp createTime;
 
-
-    public Measuraments() {
-
+    public Measuraments(int aquariumId, int typeId, int dataId, Timestamp createTime) {
+        this.aquariumId = aquariumId;
+        this.typeId = typeId;
+        this.dataId = dataId;
+        this.createTime = createTime;
     }
 
     public int getId() {

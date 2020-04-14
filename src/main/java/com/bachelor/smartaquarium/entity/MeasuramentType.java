@@ -13,7 +13,8 @@ public class MeasuramentType {
     @Column(name = "type")
     private String type;
 
-    public MeasuramentType() {
+    public MeasuramentType(String type) {
+        this.type = type;
     }
 
     public int getId() {

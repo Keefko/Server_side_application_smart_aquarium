@@ -27,16 +27,14 @@ public class DBtest {
     private final String insertUser = "INSERT INTO user(name,email,password, aquarium_id) values(?,?,?,?)";
     private final String getInsertAquariumStatus = "INSERT INTO aquarium_status(status) values(?)";
     private final String InsertAquariumType = "INSERT INTO aquarium_type(type) values(?)";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Test
     public void createUser(){
-        User user = new User();
-        user.setName("Dany");
-        user.setEmail("kok@gmail.com");
-        user.setPassword("ahoj");
-        user.setAquariumID(4);
+        User user = new User("Dany","kok@gmail.com","ahoj",4);
+
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -52,8 +50,7 @@ public class DBtest {
 
     @Test
     public  void createStatus(){
-        AquariumStatus aquariumStatus = new AquariumStatus();
-        aquariumStatus.setStatus("running");
+        AquariumStatus aquariumStatus = new AquariumStatus("running");
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -66,8 +63,7 @@ public class DBtest {
 
     @Test
     public void createType(){
-        AquariumType aquariumType = new AquariumType();
-        aquariumType.setType("sladkovodné");
+        AquariumType aquariumType = new AquariumType("sladkovodné");
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -81,14 +77,7 @@ public class DBtest {
 
     @Test
     public void dbTest(){
-        Aquarium aquarium = new Aquarium();
-        aquarium.setName("arne");
-        aquarium.setStatus(1);
-        aquarium.setType(1);
-        aquarium.setCreateTime(Timestamp.from(Instant.now()));
-        aquarium.setUpdateTime(Timestamp.from(Instant.now()));
-        aquarium.setUserId(0);
-
+        Aquarium aquarium = new Aquarium(1, "arne",Timestamp.from(Instant.now()),Timestamp.from(Instant.now()),1,1);
 
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override

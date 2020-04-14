@@ -24,7 +24,11 @@ public class ComponentActions {
     @Column(name = "period")
     private int period;
 
-    public ComponentActions() {
+    public ComponentActions(int componentId, String title, boolean periodAllowed, int period) {
+        this.componentId = componentId;
+        this.title = title;
+        this.periodAllowed = periodAllowed;
+        this.period = period;
     }
 
     public int getId() {

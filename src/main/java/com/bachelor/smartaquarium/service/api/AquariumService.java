@@ -11,12 +11,12 @@ public interface AquariumService {
     List<Aquarium> getAquariums();
 
     @Nullable
-    Aquarium get(int id);
+    Aquarium get(long id);
 
     @Nullable
     Aquarium add(Aquarium aquarium);
 
-    void delete(int id);
+    void delete(long id);
 
-    Aquarium update(int id, UpdateAquariumRequest request);
+    Aquarium update(long id, UpdateAquariumRequest request);
 }

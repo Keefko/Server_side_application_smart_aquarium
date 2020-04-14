@@ -15,7 +15,8 @@ public class MeasuramentData {
     private int value;
 
 
-    public MeasuramentData() {
+    public MeasuramentData(int value) {
+        this.value = value;
     }
 
     public int getId() {

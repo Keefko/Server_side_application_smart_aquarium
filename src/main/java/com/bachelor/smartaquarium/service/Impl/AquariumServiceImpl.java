@@ -22,7 +22,7 @@ public class AquariumServiceImpl implements AquariumService {
     }
 
     @Override
-    public Aquarium get(int id){
+    public Aquarium get(long id){
         Optional<Aquarium> aquarium = aquariumRepository.findById(id);
 
         if(aquarium.isPresent()){
@@ -38,12 +38,12 @@ public class AquariumServiceImpl implements AquariumService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         aquariumRepository.deleteById(id);
     }
 
     @Override
-    public Aquarium update(int id, UpdateAquariumRequest request) {
+    public Aquarium update(long id, UpdateAquariumRequest request) {
         Optional<Aquarium> aquarium = aquariumRepository.findById(id);
 
         if(aquarium.isPresent()){

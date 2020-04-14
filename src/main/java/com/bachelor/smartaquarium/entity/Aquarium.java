@@ -35,6 +35,15 @@ public class Aquarium {
     @Column(name = "status")
     private int status;
 
+    public Aquarium(int userId, String name, Timestamp createTime, Timestamp updateTime, int type, int status) {
+        this.userId = userId;
+        this.name = name;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.type = type;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

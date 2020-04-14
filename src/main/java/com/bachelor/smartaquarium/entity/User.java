@@ -22,7 +22,11 @@ public class User {
     @Column(name = "aquarium_id")
     private int aquariumID;
 
-    public User() {
+    public User(String name, String password, String email, int aquariumID) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.aquariumID = aquariumID;
     }
 
     public int getId() {

@@ -11,6 +11,7 @@ public interface MeasuramentService {
 
     List<Measurament> getAllMeasuramentByAquariumId(Integer aquariumId);
     List<Measurament> getAllMeasuramentByDate(Integer aquariumId, Timestamp from, Timestamp to);
+    Measurament getLastMeasurament(Integer aquariumId);
     Measurament get(Integer id);
     void add(Measurament measurament);
     void deleteById(Integer id);

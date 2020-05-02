@@ -31,6 +31,11 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
+    public Measurament getLastMeasurament(Integer aquariumId) {
+        return measuramentRepository.getLastMeasurament(aquariumId);
+    }
+
+    @Override
     public Measurament get(Integer id) {
         Optional<Measurament> optional = measuramentRepository.findById(id);
         Measurament measurament = null;

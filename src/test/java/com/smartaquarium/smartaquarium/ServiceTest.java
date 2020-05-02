@@ -7,6 +7,7 @@ import com.smartaquarium.smartaquarium.entity.User;
 
 
 import com.smartaquarium.smartaquarium.service.AquariumService;
+import com.smartaquarium.smartaquarium.service.MeasuramentService;
 import com.smartaquarium.smartaquarium.service.UserService;
 
 import org.junit.Test;
@@ -29,6 +30,9 @@ public class ServiceTest {
 
     @Autowired
     private AquariumService aquariumService;
+
+    @Autowired
+    private MeasuramentService measuramentService;
 
     @Test
     public void user(){
@@ -62,6 +66,9 @@ public class ServiceTest {
     @Test
     public void measurament(){
         Measurament measurament = new Measurament(18845, 20, 15, 27.5, Timestamp.from(Instant.now()));
+        measuramentService.add(measurament);
+        List<Measurament> measuraments = measuramentService.getAllMeasuramentByAquariumId(18845);
 
+        System.out.println(measuraments);
     }
 }

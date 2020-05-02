@@ -18,4 +18,8 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     @Query("DELETE FROM Measurament m WHERE m.aquariumId = ?1")
     void deleteAllByAquariumId(Integer aquariumId);
 
+    @Query("SELECT MAX(m.id) FROM Measurament m WHERE m.aquariumId = ?1")
+    Measurament  getLastMeasurament(Integer aquariumId);
+
+
 }

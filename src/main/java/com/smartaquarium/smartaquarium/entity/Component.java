@@ -16,6 +16,10 @@ public class Component {
 
     @NonNull
     @Column(name = "aquarium_id")
+    private Integer aquariumId;
+
+    @NonNull
+    @Column(name ="name")
     private String name;
 
     @Column(name = "period_allowed")
@@ -24,18 +28,35 @@ public class Component {
     @Column(name = "period")
     private Timestamp period;
 
+    @Column(name = "turn_on")
+    private Boolean turnOn;
+
+    @Column(name = "cyklus")
+    private int cyklus;
 
     public Component() {
     }
 
-    public Component(String name, Boolean periodAllowed, Timestamp period){
+    public Component(Integer aquariumId,String name, Boolean periodAllowed, Timestamp period, Boolean turnOn, int cyklus){
+        this.aquariumId = aquariumId;
         this.name = name;
         this.periodAllowed = periodAllowed;
         this.period = period;
+        this.turnOn = turnOn;
+        this.cyklus = cyklus;
     }
 
     public Integer getId() {
         return id;
+    }
+
+    @NonNull
+    public Integer getAquariumId() {
+        return aquariumId;
+    }
+
+    public void setAquariumId(@NonNull Integer aquariumId) {
+        this.aquariumId = aquariumId;
     }
 
     @NonNull
@@ -61,6 +82,23 @@ public class Component {
 
     public void setPeriod(Timestamp period) {
         this.period = period;
+    }
+
+
+    public Boolean getTurnOn() {
+        return turnOn;
+    }
+
+    public void setTurnOn(Boolean turnOn) {
+        this.turnOn = turnOn;
+    }
+
+    public int getCyklus() {
+        return cyklus;
+    }
+
+    public void setCyklus(int cyklus) {
+        this.cyklus = cyklus;
     }
 
     @Override

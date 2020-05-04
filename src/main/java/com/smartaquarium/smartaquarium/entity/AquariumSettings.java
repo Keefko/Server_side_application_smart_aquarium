@@ -18,49 +18,30 @@ public class AquariumSettings {
     private String name;
 
     @NonNull
-    @Column(name = "min_ph")
-    private int minPh;
+    @Column(name = "ph")
+    private int ph;
 
     @NonNull
-    @Column(name = "min_orp")
-    private int minOrp;
+    @Column(name = "orp")
+    private int orp;
 
     @NonNull
-    @Column(name = "min_temperature")
-    private Double minTemperature;
-
-    @NonNull
-    @Column(name = "max_ph")
-    private int maxPh;
-
-    @NonNull
-    @Column(name = "max_orp")
-    private int maxOrp;
-
-    @NonNull
-    @Column(name = "max_temperature")
-    private Double maxTemperature;
+    @Column(name = "temperature")
+    private Double temperature;
 
     @NonNull
     @Column(name = "aquarium_id")
     private Integer aquariumId;
 
-    @NonNull
-    @Column(name = "user_id")
-    private Integer userId;
-
     public AquariumSettings() {
     }
 
-    public AquariumSettings(int minPh, int minOrp, Double minTemperature, int maxPh, int maxOrp, Double maxTemperature, Integer aquariumId, Integer userId) {
-        this.minPh = minPh;
-        this.minOrp = minOrp;
-        this.minTemperature = minTemperature;
-        this.maxPh = maxPh;
-        this.maxOrp = maxOrp;
-        this.maxTemperature = maxTemperature;
+    public AquariumSettings(int ph, int orp, Double temperature,Integer aquariumId) {
+        this.ph = ph;
+        this.orp = orp;
+        this.temperature = temperature;
         this.aquariumId = aquariumId;
-        this.userId = userId;
+
     }
 
     public Integer getId() {
@@ -76,54 +57,31 @@ public class AquariumSettings {
         this.name = name;
     }
 
-    public int getMinPh() {
-        return minPh;
+    @NonNull
+    public int getPh() {
+        return ph;
     }
 
-    public void setMinPh(int minPh) {
-        this.minPh = minPh;
-    }
-
-    public int getMinOrp() {
-        return minOrp;
-    }
-
-    public void setMinOrp(int minOrp) {
-        this.minOrp = minOrp;
+    public void setPh(@NonNull int ph) {
+        this.ph = ph;
     }
 
     @NonNull
-    public Double getMinTemperature() {
-        return minTemperature;
+    public int getOrp() {
+        return orp;
     }
 
-    public void setMinTemperature(@NonNull Double minTemperature) {
-        this.minTemperature = minTemperature;
-    }
-
-    public int getMaxPh() {
-        return maxPh;
-    }
-
-    public void setMaxPh(int maxPh) {
-        this.maxPh = maxPh;
-    }
-
-    public int getMaxOrp() {
-        return maxOrp;
-    }
-
-    public void setMaxOrp(int maxOrp) {
-        this.maxOrp = maxOrp;
+    public void setOrp(@NonNull int orp) {
+        this.orp = orp;
     }
 
     @NonNull
-    public Double getMaxTemperature() {
-        return maxTemperature;
+    public Double getTemperature() {
+        return temperature;
     }
 
-    public void setMaxTemperature(@NonNull Double maxTemperature) {
-        this.maxTemperature = maxTemperature;
+    public void setTemperature(@NonNull Double temperature) {
+        this.temperature = temperature;
     }
 
     @NonNull
@@ -139,28 +97,15 @@ public class AquariumSettings {
         this.id = id;
     }
 
-    @NonNull
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(@NonNull Integer userId) {
-        this.userId = userId;
-    }
-
     @Override
     public String toString() {
         return "AquariumSettings{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", minPh=" + minPh +
-                ", minOrp=" + minOrp +
-                ", minTemperature=" + minTemperature +
-                ", maxPh=" + maxPh +
-                ", maxOrp=" + maxOrp +
-                ", maxTemperature=" + maxTemperature +
+                ", ph=" + ph +
+                ", orp=" + orp +
+                ", temperature=" + temperature +
                 ", aquariumId=" + aquariumId +
-                ", userId=" + userId +
                 '}';
     }
 }

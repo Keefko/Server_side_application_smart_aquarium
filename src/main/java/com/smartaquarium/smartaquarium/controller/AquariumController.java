@@ -25,8 +25,8 @@ public class AquariumController {
     }
 
     @GetMapping("/user/{id}")
-    public List<Aquarium> getAllUsersAquariums(@PathVariable Integer userId){
-        return aquariumService.getAllUsersAquariums(userId);
+    public List<Aquarium> getAllUsersAquariums(@PathVariable Integer id){
+        return aquariumService.getAllUsersAquariums(id);
     }
 
     @GetMapping("/{id}")

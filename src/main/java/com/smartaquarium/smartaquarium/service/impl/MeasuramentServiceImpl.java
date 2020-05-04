@@ -61,4 +61,5 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     public void deleteAllByAquariumId(Integer aquariumId) {
         measuramentRepository.deleteAllByAquariumId(aquariumId);
     }
+
 }

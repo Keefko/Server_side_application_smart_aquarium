@@ -7,7 +7,6 @@ import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,11 +17,6 @@ public class AquariumSettingServiceImpl implements AquariumSettingsService {
     @Autowired
     public AquariumSettingServiceImpl(AquariumSettingsRepository aquariumSettingsRepository) {
         this.aquariumSettingsRepository = aquariumSettingsRepository;
-    }
-
-    @Override
-    public List<AquariumSettings> getAllSettingsByUserId(Integer userId) {
-        return aquariumSettingsRepository.getAllSettingsByUserId(userId);
     }
 
     @Override

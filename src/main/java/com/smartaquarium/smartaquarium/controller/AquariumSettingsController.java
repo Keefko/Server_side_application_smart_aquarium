@@ -6,8 +6,6 @@ import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("settings")
 public class AquariumSettingsController {
@@ -17,11 +15,6 @@ public class AquariumSettingsController {
     @Autowired
     public AquariumSettingsController(AquariumSettingsService aquariumSettingsService) {
         this.aquariumSettingsService = aquariumSettingsService;
-    }
-
-    @GetMapping("/user/{id}")
-    public List<AquariumSettings> getAllSettingsByUserId(@PathVariable Integer id){
-        return aquariumSettingsService.getAllSettingsByUserId(id);
     }
 
     @GetMapping("/aquarium/{id}")

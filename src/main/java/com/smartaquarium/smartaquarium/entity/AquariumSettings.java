@@ -36,12 +36,12 @@ public class AquariumSettings {
     public AquariumSettings() {
     }
 
-    public AquariumSettings(int ph, int orp, Double temperature,Integer aquariumId) {
+    public AquariumSettings(int ph, int orp, Double temperature,Integer aquariumId, String name) {
         this.ph = ph;
         this.orp = orp;
         this.temperature = temperature;
         this.aquariumId = aquariumId;
-
+        this.name = name;
     }
 
     public Integer getId() {

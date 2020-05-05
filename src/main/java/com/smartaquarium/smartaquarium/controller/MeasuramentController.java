@@ -19,13 +19,12 @@ public class MeasuramentController {
         this.measuramentService = measuramentService;
     }
 
-
-    @GetMapping("/aquarium/{id]")
+    @GetMapping("/aquarium/{id}")
     public List<Measurament> getAllMeasuramentByAquariumId(@PathVariable Integer id){
         return measuramentService.getAllMeasuramentByAquariumId(id);
     }
 
-    @GetMapping("/{id}/{from}/{to]")
+    @GetMapping("/{id}/{from}/{to}")
     public List<Measurament> getAllMeasuramentByDate(@PathVariable Integer id, @PathVariable Timestamp from, @PathVariable Timestamp to){
         return measuramentService.getAllMeasuramentByDate(id,from,to);
     }
@@ -61,7 +60,7 @@ public class MeasuramentController {
         measuramentService.deleteById(id);
     }
 
-    @DeleteMapping("/aquarium/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteAllByAquariumId(@PathVariable Integer id){
         measuramentService.deleteAllByAquariumId(id);
     }

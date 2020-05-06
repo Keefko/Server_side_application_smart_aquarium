@@ -23,8 +23,10 @@ public class DBtest {
     private final String insertAquarium = "INSERT INTO aquarium(aquarium_id, name, user_id,warning) values(?,?,?,?)";
     private final String insertUser = "INSERT INTO user(login,email,password) values(?,?,?)";
     private final String insertSettings = "INSERT INTO aquarium_settings(name,ph,temperature,aquarium_id,orp) values(?,?,?,?,?)";
-    private final String insertComponent = "INSERT INTO component(aquarium_id, name, period_allowed, period) values(?,?,?,?)";
+    private final String insertComponent = "INSERT INTO component(aquarium_id, name, period_allowed, period, turn_on, cyklus) values(?,?,?,?,?,?)";
     private final String insertMeasurament = "INSERT INTO measurament(aquarium_id, ph, orp, temperature, create_time) values(?,?,?,?,?)";
+    private final String insertConnection = "INSERT INTO connection(aquarium_id,phSenzor, orpSenzor,thermometer,filtration,feeding,light) values(?,?,?,?,?,?,?)";
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -65,13 +67,33 @@ public class DBtest {
     }
 
     @Test
+    public void createConnection(){
+        com.smartaquarium.smartaquarium.entity.Connection con = new com.smartaquarium.smartaquarium.entity.Connection(15425, false , false , false , true , true ,false);
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+                PreparedStatement preparedStatement = connection.prepareStatement(insertConnection);
+                preparedStatement.setInt(1,con.getAquariumId());
+                preparedStatement.setBoolean(2,con.getPhSenzor());
+                preparedStatement.setBoolean(3,con.getOrpSenzor());
+                preparedStatement.setBoolean(4,con.getThermometer());
+                preparedStatement.setBoolean(5,con.getFiltration());
+                preparedStatement.setBoolean(6,con.getFeeding());
+                preparedStatement.setBoolean(7,con.getLight());
+                return preparedStatement;
+            }
+        });
+    }
+
+    @Test
     public void createComponent(){
         Component component = new Component();
         component.setAquariumId(15425);
         component.setName("teplomer");
         component.setPeriodAllowed(true);
         component.setPeriod(Timestamp.from(Instant.now()));
-
+        component.setCyklus(150);
+        component.setTurnOn(true);
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -80,6 +102,8 @@ public class DBtest {
                 preparedStatement.setString(2, component.getName());
                 preparedStatement.setBoolean(3, component.getPeriodAllowed());
                 preparedStatement.setTimestamp(4, component.getPeriod());
+                preparedStatement.setBoolean(5,component.getTurnOn());
+                preparedStatement.setInt(6,component.getCyklus());
                 return preparedStatement;
             }
         });
@@ -124,5 +148,7 @@ public class DBtest {
             }
         });
     }
+
+
 
 }

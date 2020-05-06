@@ -4,6 +4,7 @@ package com.smartaquarium.smartaquarium.entity;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.sql.PreparedStatement;
 
 @Entity
 @Table(name = "connection")
@@ -18,10 +19,10 @@ public class Connection {
     @Column(name = "aquarium_id")
     private Integer aquariumId;
 
-    @Column(name = "phSenzor")
+    @Column(name = "ph_senzor")
     private Boolean phSenzor;
 
-    @Column(name = "orpSenzor")
+    @Column(name = "orp_senzor")
     private Boolean orpSenzor;
 
     @Column(name = "thermometer")
@@ -109,4 +110,5 @@ public class Connection {
     public void setLight(Boolean light) {
         this.light = light;
     }
+
 }

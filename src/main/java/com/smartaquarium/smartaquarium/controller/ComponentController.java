@@ -5,7 +5,6 @@ import com.smartaquarium.smartaquarium.entity.Component;
 import com.smartaquarium.smartaquarium.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

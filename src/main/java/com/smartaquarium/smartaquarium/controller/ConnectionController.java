@@ -32,8 +32,14 @@ public class ConnectionController {
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Connection connection){
-        connectionService.add(connection);
+    public void add(@RequestBody Connection connection)
+    {
+        Connection con = connectionService.getByAquariumId(connection.getAquariumId());
+        if(con == null) {
+            connectionService.add(connection);
+        } else {
+            throw new RuntimeException("Konekcia na akvárium s id" +  connection.getAquariumId() + "už existuje");
+        }
     }
 
     @PutMapping

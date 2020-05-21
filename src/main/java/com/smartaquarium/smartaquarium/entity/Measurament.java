@@ -39,6 +39,7 @@ public class Measurament {
     public Measurament() {
     }
 
+
     public Measurament(Integer aquariumId, int ph, int orp , Double temperature, Timestamp createTime) {
         this.aquariumId = aquariumId;
         this.ph = ph;

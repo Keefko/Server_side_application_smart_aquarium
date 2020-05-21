@@ -54,7 +54,7 @@ public class ConnectionController {
     }
 
     @DeleteMapping("/aquarium/{id}")
-    public void deleteByAquariumId(Integer id){
+    public void deleteByAquariumId(@PathVariable Integer id){
         connectionService.deleteByAquariumId(id);
     }
 }

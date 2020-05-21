@@ -3,6 +3,7 @@ package com.smartaquarium.smartaquarium.service.impl;
 import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.repository.AquariumRepository;
 import com.smartaquarium.smartaquarium.service.AquariumService;
+import com.smartaquarium.smartaquarium.service.request.DeleteRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +43,19 @@ public class AquariumServiceImpl implements AquariumService {
 
     @Override
     public Integer add(Aquarium aquarium) {
+        Optional<Aquarium> optional = aquariumRepository.findById(aquarium.getId());
+
+        if(optional.isPresent()){
+            throw new RuntimeException("Aquarium s daným id:" + aquarium.getId() +"už existuje");
+        }
+
         return aquariumRepository.save(aquarium).getId();
     }
 
     @Override
     public void deleteById(Integer id) {
+        DeleteRequest deleteRequest = new DeleteRequest();
+        deleteRequest.deleteAquariumConexions(id);
         aquariumRepository.deleteById(id);
     }
 
@@ -55,3 +64,4 @@ public class AquariumServiceImpl implements AquariumService {
     }
 
 }
+

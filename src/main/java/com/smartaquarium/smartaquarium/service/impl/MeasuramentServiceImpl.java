@@ -62,4 +62,27 @@ public class MeasuramentServiceImpl implements MeasuramentService {
         measuramentRepository.deleteAllByAquariumId(aquariumId);
     }
 
+    @Override
+    public int getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to, String interval) {
+
+        switch (interval){
+
+            case "hour":
+
+        }
+
+        return 0;
+    }
+
+    @Override
+    public int getOrpAvg(Integer aquariumdId, Timestamp from, Timestamp to, String interval) {
+        return 0;
+    }
+
+
+    @Override
+    public Double getThermoAvg(Integer aquariumdId, Timestamp from, Timestamp to, String interval) {
+        return null;
+    }
+
 }

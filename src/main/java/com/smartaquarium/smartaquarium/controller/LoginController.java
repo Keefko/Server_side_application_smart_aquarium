@@ -4,6 +4,8 @@ import com.smartaquarium.smartaquarium.entity.User;
 import com.smartaquarium.smartaquarium.repository.UserRepository;
 import com.smartaquarium.smartaquarium.security.BcryptGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +23,12 @@ public class LoginController {
     }
 
     @GetMapping("/{login}/{password}")
-    public User userLoggedIn(@PathVariable String login, @PathVariable String password ){
+    public ResponseEntity userLoggedIn(@PathVariable String login, @PathVariable String password ){
         BcryptGenerator bcryptGenerator = new BcryptGenerator();
         User user = userRepository.getUserByLogin(login);
         if(bcryptGenerator.isPasswordMatch(password,user.getPassword())){
-            return user;
-        } else {
-            throw new RuntimeException("Heslo alebo prihlasovacie meno sa nezhoduje");
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
+        return new ResponseEntity<>("Login alebo heslo sa nezhoduje",HttpStatus.BAD_REQUEST);
     }
 }

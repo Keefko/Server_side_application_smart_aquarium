@@ -4,6 +4,8 @@ package com.smartaquarium.smartaquarium.controller;
 import com.smartaquarium.smartaquarium.entity.User;
 import com.smartaquarium.smartaquarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,34 +28,50 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User findUserById(@PathVariable int id){
+    public ResponseEntity findUserById(@PathVariable int id){
         User user = userService.get(id);
-        if(user == null){
-            throw new RuntimeException("Užívateľ s id" + id + "neexistuje");
+        if(user != null){
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        return user;
+        return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
-    public void addUser(@RequestBody User user){
+    public ResponseEntity addUser(@RequestBody User user){
+        User user1 = userService.getUserByLogin(user.getLogin());
+        User user2 = userService.getUserByEmail(user.getEmail());
+        if(user1 != null){
+            return new ResponseEntity<>("Užívateľ s prihlásovacím menom " + user.getLogin() + " už neexistuje", HttpStatus.BAD_REQUEST);
+        }
+
+        if(user2 != null){
+            return new ResponseEntity<>("Užívateľ s daným emailom " + user.getEmail() + " už neexistuje", HttpStatus.BAD_REQUEST);
+        }
+
         userService.add(user);
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
     @PutMapping
-    public User updateUser(@RequestBody User user){
-        userService.add(user);
-        return user;
+    public ResponseEntity updateUser(@RequestBody User user){
+        User user1 = userService.get(user.getId());
+        if(user1 != null){
+            userService.add(user);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("Užívateľ neexstiuje",HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable int id){
+    public ResponseEntity deleteUser(@PathVariable int id){
         User user = userService.get(id);
 
         if(user == null){
-            throw new RuntimeException("Užívateľ s id" + id + "neexistuje");
+            return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
         }
 
         userService.deleteById(id);
-        return (id + ": Užívateľ bol zmazaný");
+        return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
     }
 }

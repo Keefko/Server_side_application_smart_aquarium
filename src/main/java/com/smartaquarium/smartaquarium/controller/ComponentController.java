@@ -4,6 +4,8 @@ package com.smartaquarium.smartaquarium.controller;
 import com.smartaquarium.smartaquarium.entity.Component;
 import com.smartaquarium.smartaquarium.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -24,23 +26,28 @@ public class ComponentController {
     }
 
     @GetMapping("/{id}")
-    public Component get(@PathVariable Integer id){
+    public ResponseEntity get(@PathVariable Integer id){
         Component component = componentService.get(id);
-        if(component == null){
-            throw new RuntimeException("Ovladací prvok s id" +id+ "neexistuje");
+        if(component != null){
+            return new ResponseEntity<>(component, HttpStatus.OK);
         }
-        return component;
+        return new ResponseEntity<>("Ovládací prvok s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Component component){
+    public ResponseEntity  add(@RequestBody Component component){
         componentService.add(component);
+        return new ResponseEntity(component, HttpStatus.OK);
     }
 
     @PutMapping
-    public Component updateComponent(@RequestBody Component component){
-        componentService.add(component);
-        return component;
+    public ResponseEntity  updateComponent(@RequestBody Component component){
+        Component component1 = componentService.get(component.getId());
+        if(component1 != null){
+            componentService.add(component);
+            return new ResponseEntity<>(component, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Ovládací prvok neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

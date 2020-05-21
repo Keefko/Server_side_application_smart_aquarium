@@ -4,6 +4,8 @@ package com.smartaquarium.smartaquarium.controller;
 import com.smartaquarium.smartaquarium.entity.Connection;
 import com.smartaquarium.smartaquarium.service.ConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,34 +20,42 @@ public class ConnectionController {
     }
 
     @GetMapping("/aquarium/{id}")
-    public Connection getByAquariumId(@PathVariable Integer id){
-        return connectionService.getByAquariumId(id);
+    public ResponseEntity  getByAquariumId(@PathVariable Integer id){
+        Connection connection = connectionService.getByAquariumId(id);
+        if(connection != null){
+            return new ResponseEntity<>(connection, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Akvárium s daným id" +id + " neexistuje" , HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
-    public Connection get(@PathVariable Integer id){
+    public ResponseEntity get(@PathVariable Integer id){
         Connection connection = connectionService.get(id);
-        if(connection == null){
-            throw new RuntimeException("Pripojenie senzorov s id" + id + "sa nenašlo");
+        if(connection != null){
+            return new ResponseEntity<>(connection, HttpStatus.OK);
         }
-        return connection;
+        return new ResponseEntity<>("Pripojenie senzorov s daným id" +id + " sa nenašlo" , HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
-    public void add(@RequestBody Connection connection)
+    public ResponseEntity add(@RequestBody Connection connection)
     {
         Connection con = connectionService.getByAquariumId(connection.getAquariumId());
         if(con == null) {
             connectionService.add(connection);
-        } else {
-            throw new RuntimeException("Konekcia na akvárium s id" +  connection.getAquariumId() + "už existuje");
+            return new ResponseEntity<>(connection, HttpStatus.OK);
         }
+        return new ResponseEntity<>("Pripojenie senzorov na dáne akvárium uz existuje", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping
-    public Connection updateConnection (@RequestBody Connection connection){
-        connectionService.add(connection);
-        return connection;
+    public ResponseEntity updateConnection (@RequestBody Connection connection){
+        Connection connection1 = connectionService.getByAquariumId(connection.getAquariumId());
+        if(connection1 != null) {
+            connectionService.add(connection);
+            return new ResponseEntity<>(connection, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Pripojenie na akávrium neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

@@ -40,7 +40,7 @@ public class AquariumSettingsController {
     @PostMapping("/add")
     public ResponseEntity  add(@RequestBody AquariumSettings aquariumSettings){
         AquariumSettings aquariumSettings1 = aquariumSettingsService.getSettingByAquariumId(aquariumSettings.getAquariumId());
-        if(aquariumSettings1 != null) {
+        if(aquariumSettings1 == null) {
             aquariumSettingsService.add(aquariumSettings);
             return new ResponseEntity<>(aquariumSettings,HttpStatus.OK);
         }
@@ -58,8 +58,13 @@ public class AquariumSettingsController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
-        aquariumSettingsService.deleteById(id);
+    public ResponseEntity  deleteById(@PathVariable Integer id){
+        AquariumSettings aquariumSettings = aquariumSettingsService.get(id);
+        if(aquariumSettings != null) {
+            aquariumSettingsService.deleteById(id);
+            return new ResponseEntity<>("Nastavenie bolo zmazané", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Zadané nástavenie neexistuje", HttpStatus.NOT_FOUND);
     }
 
 

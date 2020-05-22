@@ -36,8 +36,12 @@ public class ComponentController {
 
     @PostMapping("/add")
     public ResponseEntity  add(@RequestBody Component component){
-        componentService.add(component);
-        return new ResponseEntity(component, HttpStatus.OK);
+        Component component1 = componentService.get(component.getId());
+        if(component1 == null) {
+            componentService.add(component);
+            return new ResponseEntity(component, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Ovládací prvok už existuje", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping
@@ -51,8 +55,13 @@ public class ComponentController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
-        componentService.deleteById(id);
+    public ResponseEntity deleteById(@PathVariable Integer id){
+        Component component = componentService.get(id);
+        if(component != null) {
+            componentService.deleteById(id);
+            return new ResponseEntity<>("ovládaci prvok bol zmazaný", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Ovládací prvok neexistuje", HttpStatus.NOT_FOUND);
     }
 
 }

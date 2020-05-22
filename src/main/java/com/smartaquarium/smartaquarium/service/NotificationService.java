@@ -10,6 +10,7 @@ public interface NotificationService {
 
     List<Notification> getUserNotifications();
     Notification get(int id);
+    Notification getAquariumNotificationByProperty(Integer aquariumId, String property);
     Integer add(Notification notification);
     void deleteById(int id);
 }

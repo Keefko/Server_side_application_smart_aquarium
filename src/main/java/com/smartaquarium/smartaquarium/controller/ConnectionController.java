@@ -34,7 +34,7 @@ public class ConnectionController {
         if(connection != null){
             return new ResponseEntity<>(connection, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Pripojenie senzorov s daným id" +id + " sa nenašlo" , HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Spojenie senzorov s daným id" +id + " sa nenašlo" , HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
@@ -45,7 +45,7 @@ public class ConnectionController {
             connectionService.add(connection);
             return new ResponseEntity<>(connection, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Pripojenie senzorov na dáne akvárium uz existuje", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Spojenie senzorov na dáne akvárium uz existuje", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping
@@ -55,16 +55,26 @@ public class ConnectionController {
             connectionService.add(connection);
             return new ResponseEntity<>(connection, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Pripojenie na akávrium neexistuje", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Spojenie s akávriom neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
-        connectionService.deleteById(id);
+    public ResponseEntity deleteById(@PathVariable Integer id){
+        Connection connection = connectionService.get(id);
+        if(connection != null) {
+            connectionService.deleteById(id);
+            return new ResponseEntity<>("Spojenie bolo zmazané",HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Spojenie s daným id neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/aquarium/{id}")
-    public void deleteByAquariumId(@PathVariable Integer id){
-        connectionService.deleteByAquariumId(id);
+    public ResponseEntity deleteByAquariumId(@PathVariable Integer id){
+        Connection connection = connectionService.getByAquariumId(id);
+        if(connection != null){
+            connectionService.deleteByAquariumId(id);
+            return new ResponseEntity<>("Spojenie bolo zmazané",HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Spojenie s daným akváriom neexistuje", HttpStatus.NOT_FOUND);
     }
 }

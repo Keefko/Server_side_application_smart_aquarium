@@ -37,6 +37,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public Notification getAquariumNotificationByProperty(Integer aquariumId, String property) {
+        return notificationRepository.getAquariumNotificationByProperty(aquariumId,property);
+    }
+
+    @Override
     public Integer add(Notification notification) {
         return notificationRepository.save(notification).getId();
     }

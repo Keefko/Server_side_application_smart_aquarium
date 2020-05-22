@@ -43,7 +43,7 @@ public class AquariumController {
     @PostMapping("/add")
     public ResponseEntity add (@RequestBody Aquarium aquarium){
         Aquarium aqua = aquariumService.get(aquarium.getId());
-        if(aqua != null) {
+        if(aqua == null) {
             aquariumService.add(aquarium);
             return new ResponseEntity<>(aquarium, HttpStatus.OK);
         }
@@ -60,13 +60,13 @@ public class AquariumController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
-        aquariumService.deleteById(id);
-    }
-
-    @DeleteMapping("/user/{id}")
-    public void deleteAllByUserId(@PathVariable Integer id){
-        aquariumService.deleteAllByUserId(id);
+    public ResponseEntity deleteById(@PathVariable Integer id){
+        Aquarium aquarium = aquariumService.get(id);
+        if(aquarium != null) {
+            aquariumService.deleteById(id);
+            return  new ResponseEntity<>("Akvárium s id " + id + " bolo zmazané" ,HttpStatus.OK);
+        }
+        return  new ResponseEntity<>("Zadané akvárium neexistuje", HttpStatus.NOT_FOUND);
     }
 
 }

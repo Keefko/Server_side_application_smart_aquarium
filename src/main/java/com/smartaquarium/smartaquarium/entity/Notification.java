@@ -25,13 +25,17 @@ public class Notification {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "visible")
+    private Boolean visible;
+
     public Notification() {
     }
 
-    public Notification(Integer aquariumId, String property, String text) {
+    public Notification(Integer aquariumId, String property, String text,Boolean visible) {
         this.aquariumId = aquariumId;
         this.property = property;
         this.text = text;
+        this.visible = visible;
     }
 
 
@@ -64,5 +68,13 @@ public class Notification {
 
     public void setText(@NonNull String text) {
         this.text = text;
+    }
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
     }
 }

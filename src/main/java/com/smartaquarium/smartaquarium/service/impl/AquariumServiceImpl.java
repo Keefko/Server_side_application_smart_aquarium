@@ -3,7 +3,7 @@ package com.smartaquarium.smartaquarium.service.impl;
 import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.repository.AquariumRepository;
 import com.smartaquarium.smartaquarium.service.AquariumService;
-import com.smartaquarium.smartaquarium.service.request.DeleteRequest;
+import com.smartaquarium.smartaquarium.service.handling.DeleteRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

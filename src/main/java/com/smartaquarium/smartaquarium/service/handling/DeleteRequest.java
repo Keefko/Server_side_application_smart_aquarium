@@ -1,4 +1,4 @@
-package com.smartaquarium.smartaquarium.service.request;
+package com.smartaquarium.smartaquarium.service.handling;
 
 
 import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;

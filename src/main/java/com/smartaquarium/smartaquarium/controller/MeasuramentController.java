@@ -51,12 +51,8 @@ public class MeasuramentController {
 
     @PostMapping("/add")
     public ResponseEntity add(@RequestBody Measurament measurament){
-        Measurament measurament1 = measuramentService.get(measurament.getId());
-        if(measurament1 == null) {
             measuramentService.add(measurament);
             return new ResponseEntity<>(measurament, HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Dané meranie už existuje", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping

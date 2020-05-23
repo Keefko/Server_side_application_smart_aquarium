@@ -42,8 +42,6 @@ public class MeasuramentServiceImpl implements MeasuramentService {
         Measurament measurament = null;
         if(optional.isPresent()){
             measurament = optional.get();
-        } else{
-            throw new RuntimeException("Meranie s ID" + id + "nebolo najdene");
         }
         return measurament;
     }

@@ -33,7 +33,8 @@ public class LoginController {
         response.put("login",user.getLogin());
         response.put("userHeslo",user.getPassword());
         response.put("heslo",passwordEncoder.encode(password));
-        if(passwordEncoder.matches(user.getPassword(), password)){
+
+        if(passwordEncoder.matches(password,user.getPassword())){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
 //        if(bcryptGenerator.isPasswordMatch(user.getPassword(),password)){

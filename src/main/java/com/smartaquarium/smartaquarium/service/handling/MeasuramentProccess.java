@@ -34,25 +34,7 @@ public class MeasuramentProccess {
             throw new RuntimeException("Akvárium nemá nastavenia");
         }
 
-        if(connection == null) {
-            Boolean phSenzor = false;
-            Boolean orpSenzor = false;
-            Boolean thermometer = false;
-
-            if(measurament.getPh() != 0){
-                phSenzor = true;
-            }
-
-            if(measurament.getOrp() != 0){
-                orpSenzor = true;
-            }
-
-            if(measurament.getTemperature() != 0.0){
-                thermometer = true;
-            }
-            Connection newCon = new Connection(measurament.getAquariumId(),phSenzor,orpSenzor,thermometer,false, false, false);
-            connectionService.add(newCon);
-        }
+        connectionSetup(measurament, connection);
 
         int phWarning = phControl(measurament.getPh(),aquariumSettings.getPh());
         int orpWarning = orpControl(measurament.getOrp(), aquariumSettings.getOrp());
@@ -69,6 +51,32 @@ public class MeasuramentProccess {
         if( temperatureWarning != 0.0){
             addNotification(measurament, (int)Math.round(temperatureWarning), "temperature" );
         }
+    }
+
+    private void connectionSetup(Measurament measurament, Connection connection) {
+
+            Boolean phSenzor = false;
+            Boolean orpSenzor = false;
+            Boolean thermometer = false;
+
+            if(measurament.getPh() != 0){
+                phSenzor = true;
+            }
+
+            if(measurament.getOrp() != 0){
+                orpSenzor = true;
+            }
+
+            if(measurament.getTemperature() != 0.0){
+                thermometer = true;
+            }
+
+            connection.setAquariumId(measurament.getAquariumId());
+            connection.setPhSenzor(phSenzor);
+            connection.setOrpSenzor(orpSenzor);
+            connection.setThermometer(thermometer);
+            connectionService.add(connection);
+
     }
 
     private void addNotification(Measurament measurament, int value, String property) {

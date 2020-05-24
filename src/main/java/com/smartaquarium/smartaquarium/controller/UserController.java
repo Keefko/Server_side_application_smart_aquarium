@@ -41,11 +41,11 @@ public class UserController {
         User user1 = userService.getUserByLogin(user.getLogin());
         User user2 = userService.getUserByEmail(user.getEmail());
         if(user1 != null){
-            return new ResponseEntity<>("Užívateľ s prihlásovacím menom " + user.getLogin() + " už neexistuje", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Užívateľ s prihlásovacím menom " + user.getLogin() + " už existuje", HttpStatus.BAD_REQUEST);
         }
 
         if(user2 != null){
-            return new ResponseEntity<>("Užívateľ s daným emailom " + user.getEmail() + " už neexistuje", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Užívateľ s daným emailom " + user.getEmail() + " už existuje", HttpStatus.BAD_REQUEST);
         }
 
         userService.add(user);

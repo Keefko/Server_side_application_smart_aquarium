@@ -41,15 +41,6 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Integer add(User user) {
-        User usr = userRepository.getUserByLogin(user.getLogin());
-        if(usr != null){
-            throw new RuntimeException("Užívateľ s existujúcim" + user.getLogin() + "už existuje");
-        }
-        User user1 = userRepository.getUserByEmail(user.getEmail());
-        if(user1 != null){
-            throw new RuntimeException("Užívateľ s existujúcim" + user.getEmail() + "už existuje");
-        }
-
         return userRepository.save(user).getId();
     }
 

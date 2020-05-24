@@ -8,10 +8,9 @@ import java.util.List;
 @Service
 public interface AquariumService {
 
-    List<Aquarium> getAquariums();
     List<Aquarium> getAllUsersAquariums(Integer userId);
     Aquarium get(Integer id);
     Integer add(Aquarium aquarium);
     void deleteById(Integer id);
-    void deleteAllByUserId(Integer id);
+
 }

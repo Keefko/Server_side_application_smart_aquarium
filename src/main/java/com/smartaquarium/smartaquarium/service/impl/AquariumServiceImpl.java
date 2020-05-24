@@ -20,10 +20,6 @@ public class AquariumServiceImpl implements AquariumService {
         this.aquariumRepository = aquariumRepository;
     }
 
-    @Override
-    public List<Aquarium> getAquariums() {
-        return aquariumRepository.findAll();
-    }
 
     public List<Aquarium> getAllUsersAquariums(Integer userId){
         return aquariumRepository.findAllByUserId(userId);
@@ -51,9 +47,7 @@ public class AquariumServiceImpl implements AquariumService {
         aquariumRepository.deleteById(id);
     }
 
-    public void deleteAllByUserId(Integer id){
-        aquariumRepository.DeleteAllByUserId(id);
-    }
+
 
 }
 

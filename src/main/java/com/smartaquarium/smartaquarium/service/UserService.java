@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public interface UserService {
 
-    List<User> getUsers();
     User get(int id);
     Integer add(User user);
     void deleteById(int id);

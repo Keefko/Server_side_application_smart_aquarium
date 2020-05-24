@@ -21,11 +21,6 @@ public class AquariumController {
         this.aquariumService = aquariumService;
     }
 
-    @GetMapping
-    public List<Aquarium> getAquariums(){
-        return aquariumService.getAquariums();
-    }
-
     @GetMapping("/user/{id}")
     public List<Aquarium> getAllUsersAquariums(@PathVariable Integer id){
         return aquariumService.getAllUsersAquariums(id);

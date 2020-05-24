@@ -22,11 +22,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
-    }
-
-    @Override
     public User get(int id) {
         Optional<User> optional = userRepository.findById(id);
         User user = null;

@@ -24,17 +24,13 @@ public class Aquarium {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "warning")
-    private Boolean warning;
-
     public Aquarium() {
     }
 
-    public Aquarium(Integer id, Integer userId, String name, Boolean warning) {
+    public Aquarium(Integer id, Integer userId, String name) {
         this.id = id;
         this.userId = userId;
         this.name = name;
-        this.warning = warning;
     }
 
     @NonNull
@@ -63,14 +59,7 @@ public class Aquarium {
     public void setName(@NonNull String name) {
         this.name = name;
     }
-
-    public Boolean getWarning() {
-        return warning;
-    }
-
-    public void setWarning(Boolean warning) {
-        this.warning = warning;
-    }
+    
 
     @Override
     public String toString() {
@@ -78,7 +67,6 @@ public class Aquarium {
                 "id=" + id +
                 ", userId=" + userId +
                 ", name='" + name + '\'' +
-                ", warning=" + warning +
                 '}';
     }
 }

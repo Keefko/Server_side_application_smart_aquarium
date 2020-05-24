@@ -26,6 +26,9 @@ public class LoginController {
     public ResponseEntity userLoggedIn(@PathVariable String login, @PathVariable String password ){
         //BcryptGenerator bcryptGenerator = new BcryptGenerator();
         User user = userRepository.getUserByLogin(login);
+        System.out.println(user);
+        System.out.println(passwordEncoder.encode(user.getPassword()));
+        System.out.println(password);
         if(passwordEncoder.matches(user.getPassword(), password)){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }

@@ -34,7 +34,7 @@ public class UserController {
         if(user != null){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        
+
         return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 

@@ -26,7 +26,7 @@ public class LoginController {
     public ResponseEntity userLoggedIn(@PathVariable String login, @PathVariable String password ){
         BcryptGenerator bcryptGenerator = new BcryptGenerator();
         User user = userRepository.getUserByLogin(login);
-        if(bcryptGenerator.isPasswordMatch(password,user.getPassword())){
+        if(bcryptGenerator.isPasswordMatch(user.getPassword(),password)){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>("Login alebo heslo sa nezhoduje",HttpStatus.BAD_REQUEST);

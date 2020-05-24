@@ -3,8 +3,8 @@ package com.smartaquarium.smartaquarium.service.handling;
 import com.smartaquarium.smartaquarium.entity.AquariumSettings;
 import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.entity.Notification;
-import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;
 import com.smartaquarium.smartaquarium.repository.NotificationRepository;
+import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -12,17 +12,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class MeasuramentProccess {
 
-    @Autowired
-    NotificationRepository notificationRepository;
+    private NotificationRepository notificationRepository;
+    private AquariumSettingsService aquariumSettingsService;
 
     @Autowired
-    AquariumSettingsRepository aquariumSettingsRepository;
-
-    public MeasuramentProccess() {}
+    public MeasuramentProccess(NotificationRepository notificationRepository, AquariumSettingsService aquariumSettingsService) {
+        this.notificationRepository = notificationRepository;
+        this.aquariumSettingsService = aquariumSettingsService;
+    }
 
     @NonNull
     public void measuramentControl(Measurament measurament){
-        AquariumSettings aquariumSettings = aquariumSettingsRepository.getSettingByAquariumId(measurament.getAquariumId());
+        AquariumSettings aquariumSettings = aquariumSettingsService.getSettingByAquariumId(measurament.getAquariumId());
 
         if(aquariumSettings ==  null){
             throw new RuntimeException("Akvárium nemá nastavenia");

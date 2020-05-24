@@ -24,7 +24,7 @@ public class MeasuramentProccess {
     public void measuramentControl(Measurament measurament){
         AquariumSettings aquariumSettings = aquariumSettingsRepository.getSettingByAquariumId(measurament.getAquariumId());
 
-        if(aquariumSettings !=  null){
+        if(aquariumSettings ==  null){
             throw new RuntimeException("Akvárium nemá nastavenia");
         }
 

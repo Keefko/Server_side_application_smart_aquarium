@@ -20,7 +20,7 @@ import java.time.Instant;
 @SpringBootTest
 public class DBtest {
 
-    private final String insertAquarium = "INSERT INTO aquarium(aquarium_id, name, user_id,warning) values(?,?,?,?)";
+    private final String insertAquarium = "INSERT INTO aquarium(aquarium_id, name, user_id) values(?,?,?)";
     private final String insertUser = "INSERT INTO user(login,email,password) values(?,?,?)";
     private final String insertSettings = "INSERT INTO aquarium_settings(name,ph,temperature,aquarium_id,orp) values(?,?,?,?,?)";
     private final String insertComponent = "INSERT INTO component(aquarium_id, name, period_allowed, period, turn_on, cyklus) values(?,?,?,?,?,?)";
@@ -51,7 +51,6 @@ public class DBtest {
         aquarium.setId(15425);
         aquarium.setName("Aquarium 1");
         aquarium.setUserId(1);
-        aquarium.setWarning(false);
         jdbcTemplate.update(new PreparedStatementCreator() {
             @Override
             public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
@@ -59,7 +58,6 @@ public class DBtest {
                 preparedStatement.setInt(1, aquarium.getId());
                 preparedStatement.setString(2, aquarium.getName());
                 preparedStatement.setInt(3, aquarium.getUserId());
-                preparedStatement.setBoolean(4,aquarium.getWarning());
                 return preparedStatement;
             }
         });

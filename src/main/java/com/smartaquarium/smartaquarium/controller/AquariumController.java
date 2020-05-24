@@ -34,6 +34,7 @@ public class AquariumController {
         }
         return new ResponseEntity<>(aquarium, HttpStatus.OK);
     }
+    
 
     @PostMapping("/add")
     public ResponseEntity add (@RequestBody Aquarium aquarium){

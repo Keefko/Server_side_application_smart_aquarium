@@ -31,7 +31,7 @@ public class LoginController {
         HashMap<String,String> response = new HashMap<>();
         User user = userRepository.getUserByLogin(login);
         response.put("login",user.getLogin());
-        response.put("userHeslo",passwordEncoder.encode(user.getPassword());
+        response.put("userHeslo",passwordEncoder.encode(user.getPassword()));
         response.put("heslo",password);
         if(passwordEncoder.matches(user.getPassword(), password)){
             return new ResponseEntity<>(user, HttpStatus.OK);

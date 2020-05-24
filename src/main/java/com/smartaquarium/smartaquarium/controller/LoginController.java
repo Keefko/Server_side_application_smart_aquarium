@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class LoginController {
 
     private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Autowired
     public LoginController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -27,19 +27,11 @@ public class LoginController {
 
     @GetMapping("/{login}/{password}")
     public ResponseEntity userLoggedIn(@PathVariable String login, @PathVariable String password ){
-        //BcryptGenerator bcryptGenerator = new BcryptGenerator();
-        HashMap<String,String> response = new HashMap<>();
+        BcryptGenerator bcryptGenerator = new BcryptGenerator();
         User user = userRepository.getUserByLogin(login);
-        response.put("login",user.getLogin());
-        response.put("userHeslo",user.getPassword());
-        response.put("heslo",passwordEncoder.encode(password));
-
-        if(passwordEncoder.matches(password,user.getPassword())){
+        if(bcryptGenerator.isPasswordMatch(password,user.getPassword())){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
-//        if(bcryptGenerator.isPasswordMatch(user.getPassword(),password)){
-//
-//        }
-        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Meno alebo heslo sa nezhoduje",HttpStatus.BAD_REQUEST);
     }
 }

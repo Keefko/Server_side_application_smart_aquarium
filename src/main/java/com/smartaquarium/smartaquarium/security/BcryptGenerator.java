@@ -10,6 +10,6 @@ public class BcryptGenerator {
     { return hashedPassword = passwordEncoder.encode(password);}
 
     public boolean isPasswordMatch(String password, String userPassword){
-        return passwordEncoder.matches(password,passwordEncoder.encode(userPassword));
+        return passwordEncoder.matches(password,userPassword);
     }
 }

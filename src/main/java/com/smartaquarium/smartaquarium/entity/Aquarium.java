@@ -20,7 +20,6 @@ public class Aquarium {
     @Column(name = "user_id")
     private Integer userId;
 
-    @NonNull
     @Column(name = "name")
     private String name;
 
@@ -51,12 +50,11 @@ public class Aquarium {
         this.userId = userId;
     }
 
-    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

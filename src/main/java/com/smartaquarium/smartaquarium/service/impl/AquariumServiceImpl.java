@@ -43,12 +43,6 @@ public class AquariumServiceImpl implements AquariumService {
 
     @Override
     public Integer add(Aquarium aquarium) {
-        Optional<Aquarium> optional = aquariumRepository.findById(aquarium.getId());
-
-        if(optional.isPresent()){
-            throw new RuntimeException("Aquarium s daným id:" + aquarium.getId() +"už existuje");
-        }
-
         return aquariumRepository.save(aquarium).getId();
     }
 

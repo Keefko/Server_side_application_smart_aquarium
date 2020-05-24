@@ -34,26 +34,20 @@ public class UserController {
         if(user != null){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
-
-        HashMap<String, String> response = new HashMap<>();
-        response.put("response","Užívateľ s id" + id + "neexistuje");
-
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        
+        return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
     public ResponseEntity addUser(@RequestBody User user){
         User user1 = userService.getUserByLogin(user.getLogin());
         User user2 = userService.getUserByEmail(user.getEmail());
-        HashMap<String, String> response = new HashMap<>();
         if(user1 != null){
-            response.put("response","Užívateľ s prihlásovacím menom " + user.getLogin() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Užívateľ s prihlásovacím menom " + user.getLogin() + " už existuje", HttpStatus.BAD_REQUEST);
         }
 
         if(user2 != null){
-            response.put("response","Užívateľ s daným emailom " + user.getEmail() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Užívateľ s daným emailom " + user.getEmail() + " už existuje", HttpStatus.BAD_REQUEST);
         }
 
         userService.add(user);

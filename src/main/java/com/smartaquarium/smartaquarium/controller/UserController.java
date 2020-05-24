@@ -48,12 +48,12 @@ public class UserController {
         HashMap<String, String> response = new HashMap<>();
         if(user1 != null){
             response.put("response","Užívateľ s prihlásovacím menom " + user.getLogin() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
         if(user2 != null){
             response.put("response","Užívateľ s daným emailom " + user.getEmail() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
 
         userService.add(user);

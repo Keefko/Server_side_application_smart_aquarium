@@ -35,8 +35,6 @@ public class AquariumServiceImpl implements AquariumService {
         Aquarium aquarium = null;
         if(optional.isPresent()){
             aquarium = optional.get();
-        }else {
-            throw new RuntimeException("Nenašlo sa aqurium s id" + id);
         }
         return aquarium;
     }

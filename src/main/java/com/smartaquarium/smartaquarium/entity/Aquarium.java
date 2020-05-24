@@ -59,7 +59,7 @@ public class Aquarium {
     public void setName(@NonNull String name) {
         this.name = name;
     }
-    
+
 
     @Override
     public String toString() {

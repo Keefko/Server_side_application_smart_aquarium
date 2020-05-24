@@ -49,7 +49,7 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     @Override
     public void add(Measurament measurament) {
         measuramentRepository.save(measurament);
-       // MeasuramentProccess measuramentProccess = new MeasuramentProccess();
+        MeasuramentProccess measuramentProccess = new MeasuramentProccess();
         //measuramentProccess.measuramentControl(measurament);
     }
 

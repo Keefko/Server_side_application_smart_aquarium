@@ -6,6 +6,7 @@ import com.smartaquarium.smartaquarium.entity.Notification;
 import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;
 import com.smartaquarium.smartaquarium.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 
 
 public class MeasuramentProccess {
@@ -18,6 +19,7 @@ public class MeasuramentProccess {
 
     public MeasuramentProccess() {}
 
+    @NonNull
     public void measuramentControl(Measurament measurament){
         AquariumSettings aquariumSettings = aquariumSettingsRepository.getSettingByAquariumId(measurament.getAquariumId());
         int phWarning = phControl(measurament.getPh(),aquariumSettings.getPh());

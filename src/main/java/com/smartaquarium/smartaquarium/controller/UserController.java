@@ -48,12 +48,12 @@ public class UserController {
         HashMap<String, String> response = new HashMap<>();
         if(user1 != null){
             response.put("response","Užívateľ s prihlásovacím menom " + user.getLogin() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
         if(user2 != null){
             response.put("response","Užívateľ s daným emailom " + user.getEmail() + " už existuje");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
         userService.add(user);
@@ -68,7 +68,7 @@ public class UserController {
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("Užívateľ neexstiuje",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Užívateľ neexistuje",HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

@@ -22,6 +22,11 @@ public class MeasuramentProccess {
     @NonNull
     public void measuramentControl(Measurament measurament){
         AquariumSettings aquariumSettings = aquariumSettingsRepository.getSettingByAquariumId(measurament.getAquariumId());
+
+        if(aquariumSettings !=  null){
+            throw new RuntimeException("Akvárium nemá nastavenia");
+        }
+
         int phWarning = phControl(measurament.getPh(),aquariumSettings.getPh());
         int orpWarning = orpControl(measurament.getOrp(), aquariumSettings.getOrp());
         Double temperatureWarning = temperatureControl(measurament.getTemperature(), aquariumSettings.getTemperature());

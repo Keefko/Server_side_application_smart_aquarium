@@ -50,7 +50,7 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     public void add(Measurament measurament) {
         measuramentRepository.save(measurament);
         MeasuramentProccess measuramentProccess = new MeasuramentProccess();
-        //measuramentProccess.measuramentControl(measurament);
+        measuramentProccess.measuramentControl(measurament);
     }
 
     @Override

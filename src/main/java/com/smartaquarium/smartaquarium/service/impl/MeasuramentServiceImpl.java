@@ -17,6 +17,9 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     private MeasuramentRepository measuramentRepository;
 
     @Autowired
+    private MeasuramentProccess measuramentProccess;
+
+    @Autowired
     public MeasuramentServiceImpl(MeasuramentRepository measuramentRepository) {
         this.measuramentRepository = measuramentRepository;
     }
@@ -49,7 +52,6 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     @Override
     public void add(Measurament measurament) {
         measuramentRepository.save(measurament);
-        MeasuramentProccess measuramentProccess = new MeasuramentProccess();
         measuramentProccess.measuramentControl(measurament);
     }
 

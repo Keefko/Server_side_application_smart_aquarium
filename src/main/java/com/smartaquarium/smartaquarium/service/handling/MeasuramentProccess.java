@@ -7,8 +7,9 @@ import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;
 import com.smartaquarium.smartaquarium.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class MeasuramentProccess {
 
     @Autowired

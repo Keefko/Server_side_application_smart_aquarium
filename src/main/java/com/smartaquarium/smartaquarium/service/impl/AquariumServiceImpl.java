@@ -38,7 +38,7 @@ public class AquariumServiceImpl implements AquariumService {
     @Override
     public Integer add(Aquarium aquarium) {
         List<Aquarium> aquariums = aquariumRepository.findAllByUserId(aquarium.getUserId());
-        aquarium.setName("Aquarium " + aquariums.size()+1);
+        aquarium.setName("Aquarium " + aquariums.size());
         return aquariumRepository.save(aquarium).getId();
     }
 

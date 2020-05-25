@@ -30,7 +30,7 @@ public class AquariumController {
     public ResponseEntity get(@PathVariable Integer id){
         Aquarium aquarium = aquariumService.get(id);
         if(aquarium == null){
-           return new ResponseEntity<>("Nepodarilo sa nájst akvárium s id" + id,HttpStatus.NOT_FOUND);
+           return new ResponseEntity<>("Nepodarilo sa nájst akvárium s id " + id,HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(aquarium, HttpStatus.OK);
     }
@@ -43,7 +43,7 @@ public class AquariumController {
             aquariumService.add(aquarium);
             return new ResponseEntity<>(aquarium, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Akvárium s id" + aquarium.getId() + "už existuje",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("Akvárium s id " + aquarium.getId() + " už existuje",HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping

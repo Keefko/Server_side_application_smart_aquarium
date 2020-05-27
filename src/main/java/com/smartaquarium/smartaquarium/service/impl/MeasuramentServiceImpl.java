@@ -36,7 +36,8 @@ public class MeasuramentServiceImpl implements MeasuramentService {
 
     @Override
     public Measurament getLastMeasurament(Integer aquariumId) {
-        return measuramentRepository.getLastMeasurament(aquariumId);
+        List<Measurament> last = measuramentRepository.getLastMeasurament(aquariumId);
+        return last.get(0);cd
     }
 
     @Override

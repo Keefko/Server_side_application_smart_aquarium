@@ -22,8 +22,8 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     @Query("DELETE FROM Measurament m WHERE m.aquariumId = ?1")
     void deleteAllByAquariumId(Integer aquariumId);
 
-    @Query(value = "SELECT m FROM Measurament m WHERE m.aquariumId = ?1 ORDER BY m.createTime ASC LIMIT 1", nativeQuery = true)
-    Measurament  getLastMeasurament(Integer aquariumId);
+    @Query("SELECT m FROM Measurament m WHERE m.aquariumId = ?1 ORDER BY m.createTime DESC")
+    List<Measurament> getLastMeasurament(Integer aquariumId);
 
     @Query("SELECT AVG(m.ph) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3")
     int getPhAvg(Integer aquariumdId,Timestamp from, Timestamp to);

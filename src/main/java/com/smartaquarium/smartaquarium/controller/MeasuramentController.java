@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,8 +56,19 @@ public class MeasuramentController {
     }
 
     @GetMapping("/{id}/{from}/{to}/{interval}")
-    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable Timestamp from,@PathVariable  Timestamp to,@PathVariable  String interval){
-        HashMap<Integer,Timestamp> response = measuramentService.getPhAvg(id,from,to);
+    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from,@PathVariable  String to,@PathVariable  String interval){
+        HashMap<Integer,Timestamp> response = null;
+        try {
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            Date tf = formatter.parse(from);
+            Date tt = formatter.parse(to);
+            Timestamp timeFrom = new Timestamp(tf.getTime());
+            Timestamp timeTo = new Timestamp(tt.getTime());
+             response = measuramentService.getPhAvg(id,timeFrom,timeTo);
+        }catch(ParseException e){
+            e.printStackTrace();
+        }
+
         return new ResponseEntity(response, HttpStatus.OK);
     }
 

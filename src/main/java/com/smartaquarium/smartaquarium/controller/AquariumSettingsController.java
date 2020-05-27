@@ -66,6 +66,4 @@ public class AquariumSettingsController {
         }
         return new ResponseEntity<>("Zadané nástavenie neexistuje", HttpStatus.NOT_FOUND);
     }
-
-
 }

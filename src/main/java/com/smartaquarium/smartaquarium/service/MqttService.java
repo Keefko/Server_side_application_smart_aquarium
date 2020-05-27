@@ -3,12 +3,8 @@ package com.smartaquarium.smartaquarium.service;
 import com.smartaquarium.smartaquarium.mqtt.MqttCall;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
 import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
-
 
 @Service
 public class MqttService {
@@ -46,7 +42,7 @@ public class MqttService {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setUserName("vojs");
         mqttConnectOptions.setPassword("Terror123456.".toCharArray());
-        mqttConnectOptions.setCleanSession(true);
+        mqttConnectOptions.setCleanSession(false);
         mqttConnectOptions.setKeepAliveInterval(60);
         mqttConnectOptions.setAutomaticReconnect(true);
         return mqttConnectOptions;

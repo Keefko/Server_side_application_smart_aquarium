@@ -1,6 +1,5 @@
 package com.smartaquarium.smartaquarium.entity;
 
-
 import org.springframework.lang.NonNull;
 import javax.persistence.*;
 

@@ -7,7 +7,9 @@ import com.smartaquarium.smartaquarium.service.handling.MeasuramentProccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,15 +69,8 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
-    public int getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to, String interval) {
-
-        switch (interval){
-
-            case "hour":
-
-        }
-
-        return 0;
+    public int getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+        return measuramentRepository.getPhAvg(aquariumdId,from,to);
     }
 
     @Override

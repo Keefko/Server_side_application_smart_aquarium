@@ -1,12 +1,16 @@
 package com.smartaquarium.smartaquarium.controller;
 
 
+import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.User;
+import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("users")
@@ -14,10 +18,12 @@ public class UserController {
 
 
     private UserService userService;
+    private AquariumService aquariumService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AquariumService aquariumService) {
         this.userService = userService;
+        this.aquariumService = aquariumService;
     }
 
     @GetMapping("/{id}")
@@ -60,11 +66,15 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable int id){
         User user = userService.get(id);
-
         if(user == null){
             return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
         }
 
+        List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
+
+        for(Aquarium aquarium : aquariums){
+            aquarium.setUserId(0);
+        }
         userService.deleteById(id);
         return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
     }

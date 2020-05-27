@@ -49,6 +49,12 @@ public class MeasuramentController {
         return new ResponseEntity<>("Meranie s id :" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/{id}/{from}/{to}/{interval}")
+    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable Timestamp from,@PathVariable  Timestamp to,@PathVariable  String interval){
+
+        return new ResponseEntity("Meranie s id :" + id + "neexistuje", HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/add")
     public ResponseEntity add(@RequestBody Measurament measurament){
             measuramentService.add(measurament);

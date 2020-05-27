@@ -53,20 +53,8 @@ public class MeasuramentController {
 
     @GetMapping("/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable Timestamp from,@PathVariable  Timestamp to,@PathVariable  String interval){
-        HashMap<Integer, Timestamp> response = new HashMap<>();
-
-
-        switch (interval){
-            case "hour":
-
-                break;
-            case "day":
-                break;
-            case "week":
-                break;
-
-        }
-        return new ResponseEntity("Meranie s id :" + id + "neexistuje", HttpStatus.NOT_FOUND);
+        HashMap<Integer,Timestamp> response = measuramentService.getPhAvg(id,from,to);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @PostMapping("/add")

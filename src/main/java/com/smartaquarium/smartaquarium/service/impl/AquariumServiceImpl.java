@@ -54,8 +54,5 @@ public class AquariumServiceImpl implements AquariumService {
         deleteRequest.deleteAquariumConexions(id);
         aquariumRepository.deleteById(id);
     }
-
-
-
 }
 

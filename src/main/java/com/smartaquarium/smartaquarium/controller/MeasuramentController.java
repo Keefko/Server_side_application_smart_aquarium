@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -51,7 +53,19 @@ public class MeasuramentController {
 
     @GetMapping("/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable Timestamp from,@PathVariable  Timestamp to,@PathVariable  String interval){
+        HashMap<Integer, Timestamp> response = new HashMap<>();
 
+
+        switch (interval){
+            case "hour":
+
+                break;
+            case "day":
+                break;
+            case "week":
+                break;
+
+        }
         return new ResponseEntity("Meranie s id :" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 

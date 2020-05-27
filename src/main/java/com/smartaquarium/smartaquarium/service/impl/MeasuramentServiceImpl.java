@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +70,7 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
-    public int getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public HashMap<Integer, Timestamp> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvg(aquariumdId,from,to);
     }
 

@@ -69,12 +69,12 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
-    public List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvg(aquariumdId,from,to);
     }
 
     @Override
-    public List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvgW(aquariumdId,from,to);
     }
 

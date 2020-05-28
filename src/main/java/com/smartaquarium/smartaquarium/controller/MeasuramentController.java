@@ -2,19 +2,17 @@ package com.smartaquarium.smartaquarium.controller;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
-import com.smartaquarium.smartaquarium.service.handling.Ph;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
+
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
+
+import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 
 @RestController
@@ -56,15 +54,17 @@ public class MeasuramentController {
         return new ResponseEntity<>("Meranie s id :" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/ph")
-    public ResponseEntity getAvgPh(@RequestBody Ph ph){
+    @GetMapping("/ph/{id}/{from}/{to}/{interval}")
+    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
         List<Object> phs = null;
-        switch (ph.getInterval()){
+        Timestamp timeFrom = Timestamp.valueOf(from);
+        Timestamp timeTo = Timestamp.valueOf(to);
+        switch (interval){
             case "hour":
-                phs = measuramentService.getPhAvg(ph.getAquariumId(),ph.getFrom(),ph.getTo());
+                phs = measuramentService.getPhAvg(id,timeFrom,timeTo);
                 break;
             case "day":
-                phs = measuramentService.getPhAvgW(ph.getAquariumId(),ph.getFrom(),ph.getTo());
+                phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
         }
         return new ResponseEntity(phs, HttpStatus.OK);

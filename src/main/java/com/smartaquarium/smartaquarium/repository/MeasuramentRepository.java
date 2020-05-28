@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
 
 public interface MeasuramentRepository extends JpaRepository<Measurament, Integer> {

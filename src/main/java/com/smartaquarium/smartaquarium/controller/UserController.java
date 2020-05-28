@@ -71,7 +71,7 @@ public class UserController {
             List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
 
             for(Aquarium aquarium : aquariums){
-                aquarium.setUserId(0);
+                aquarium.setUserId(1);
                 aquariumService.update(aquarium);
             }
             return new ResponseEntity<>(aquariums, HttpStatus.OK);

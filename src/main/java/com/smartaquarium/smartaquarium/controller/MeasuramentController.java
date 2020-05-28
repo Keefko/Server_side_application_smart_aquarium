@@ -4,6 +4,7 @@ import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
 
 
+import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class MeasuramentController {
 
     @GetMapping("/ph/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
-        List<Object> phs = null;
+        List<MeasuramentGraphData> phs = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
         switch (interval){
@@ -69,8 +70,8 @@ public class MeasuramentController {
                 break;
         }
 
-        List<HashMap<String, String>> response = getHashMaps(phs);
-        return new ResponseEntity(response, HttpStatus.OK);
+        //List<HashMap<String, String>> response = getHashMaps(phs);
+        return new ResponseEntity(phs, HttpStatus.OK);
     }
 
 

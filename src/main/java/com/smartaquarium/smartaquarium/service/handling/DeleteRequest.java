@@ -1,10 +1,7 @@
 package com.smartaquarium.smartaquarium.service.handling;
 
 
-import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;
-import com.smartaquarium.smartaquarium.repository.ComponentRepository;
-import com.smartaquarium.smartaquarium.repository.ConnectionRepository;
-import com.smartaquarium.smartaquarium.repository.MeasuramentRepository;
+import com.smartaquarium.smartaquarium.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DeleteRequest {
@@ -20,12 +17,15 @@ public class DeleteRequest {
     @Autowired
     private MeasuramentRepository measuramentRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     public void deleteAquariumConexions(Integer aquariumId){
         connectionRepository.deleteByAquariumId(aquariumId);
         measuramentRepository.deleteAllByAquariumId(aquariumId);
         aquariumSettingsRepository.deleteByAquariumId(aquariumId);
         componentRepository.deleteByAquariumId(aquariumId);
+        notificationRepository.deleteByAquariumId(aquariumId);
     }
 
 }

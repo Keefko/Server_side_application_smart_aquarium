@@ -4,6 +4,8 @@ import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,15 +67,18 @@ public class MeasuramentController {
                 phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
         }
-        HashMap<String, String> response = new HashMap<>();
+        //HashMap<String, String> response = new HashMap<>();
+        JSONArray jsonArray = new JSONArray();
         for(int i=0; i < phs.size(); i++) {
             Object[] ph = (Object[]) phs.get(i);
+            JSONObject jsonObject = new JSONObject();
             String value = String.valueOf(ph[0]);
-            String time = String.valueOf(ph[0]);
-            response.put("value", value);
-            response.put("time", time);
+            String time = String.valueOf(ph[1]);
+            jsonObject.put("value", value);
+            jsonObject.put("time", time);
+            jsonArray.put(jsonObject);
         }
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(jsonArray, HttpStatus.OK);
     }
 
     @GetMapping("/orp/{id}/{from}/{to}/{interval}")

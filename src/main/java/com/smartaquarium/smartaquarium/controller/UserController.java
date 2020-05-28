@@ -65,12 +65,12 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable int id){
-        User user = userService.get(id);
+  /*      User user = userService.get(id);
         if(user == null){
             return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
         }
 
-     /*   List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
+        List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
 
         for(Aquarium aquarium : aquariums){
             aquarium.setUserId(0);

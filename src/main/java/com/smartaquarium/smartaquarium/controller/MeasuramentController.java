@@ -69,18 +69,11 @@ public class MeasuramentController {
                 break;
         }
 
-        HashMap<String, String> map = new HashMap<>();
-        List<HashMap<String,String>> response = new ArrayList<>();
-        for(int i=0; i < phs.size(); i++) {
-            Object[] ph = (Object[]) phs.get(i);
-            String value = String.valueOf(ph[0]);
-            String time = String.valueOf(ph[1]);
-            map.put("value", value);
-            map.put("time", time);
-            response.add(map);
-        }
+        List<HashMap<String, String>> response = getHashMaps(phs);
         return new ResponseEntity(response, HttpStatus.OK);
     }
+
+
 
     @GetMapping("/orp/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgOrp(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
@@ -96,7 +89,26 @@ public class MeasuramentController {
                 break;
         }
 
-        return new ResponseEntity(orps, HttpStatus.OK);
+        List<HashMap<String, String>> response = getHashMaps(orps);
+
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/temperature/{id}/{from}/{to}/{interval}")
+    public ResponseEntity getAvgThermo(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
+        List<Object> temperatures = null;
+        Timestamp timeFrom = Timestamp.valueOf(from);
+        Timestamp timeTo = Timestamp.valueOf(to);
+        switch (interval){
+            case "hour":
+                temperatures = measuramentService.getThermoAvg(id,timeFrom,timeTo);
+                break;
+            case "day":
+                temperatures = measuramentService.getThermoAvgW(id,timeFrom,timeTo);
+                break;
+        }
+        List<HashMap<String, String>> response = getHashMaps(temperatures);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -136,4 +148,18 @@ public class MeasuramentController {
         return new ResponseEntity<>("Akvárium s daným id neexistuje", HttpStatus.NOT_FOUND);
     }
 
+
+    private List<HashMap<String, String>> getHashMaps(List<Object> values) {
+        HashMap<String, String> map = new HashMap<>();
+        List<HashMap<String, String>> response = new ArrayList<>();
+        for (int i = 0; i < values.size(); i++) {
+            Object[] ph = (Object[]) values.get(i);
+            String value = String.valueOf(ph[0]);
+            String time = String.valueOf(ph[1]);
+            map.put("value", value);
+            map.put("time", time);
+            response.add(map);
+        }
+        return response;
+    }
 }

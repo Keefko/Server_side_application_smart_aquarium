@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -67,18 +68,18 @@ public class MeasuramentController {
                 phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
         }
-        //HashMap<String, String> response = new HashMap<>();
-        JSONArray jsonArray = new JSONArray();
+
+        HashMap<String, String> map = new HashMap<>();
+        List<HashMap<String,String>> response = new ArrayList<>();
         for(int i=0; i < phs.size(); i++) {
             Object[] ph = (Object[]) phs.get(i);
-            JSONObject jsonObject = new JSONObject();
             String value = String.valueOf(ph[0]);
             String time = String.valueOf(ph[1]);
-            jsonObject.put("value", value);
-            jsonObject.put("time", time);
-            jsonArray.put(jsonObject);
+            map.put("value", value);
+            map.put("time", time);
+            response.add(map);
         }
-        return new ResponseEntity(jsonArray, HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping("/orp/{id}/{from}/{to}/{interval}")

@@ -3,6 +3,7 @@ package com.smartaquarium.smartaquarium.service.impl;
 import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.repository.MeasuramentRepository;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
+import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import com.smartaquarium.smartaquarium.service.handling.MeasuramentProccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,12 +69,12 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
-    public List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvg(aquariumdId,from,to);
     }
 
     @Override
-    public List<Object> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvgW(aquariumdId,from,to);
     }
 

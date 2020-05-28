@@ -1,6 +1,7 @@
 package com.smartaquarium.smartaquarium.service;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
+import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -17,8 +18,8 @@ public interface MeasuramentService {
     void add(Measurament measurament);
     void deleteById(Integer id);
     void deleteAllByAquariumId(Integer aquariumId);
-    List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
-    List<Object> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
     int getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to, String interval);
     Double getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to, String interval);
 }

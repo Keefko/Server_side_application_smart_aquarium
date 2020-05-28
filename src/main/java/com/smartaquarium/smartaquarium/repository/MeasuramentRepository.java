@@ -1,6 +1,7 @@
 package com.smartaquarium.smartaquarium.repository;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
+import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,10 +27,10 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     List<Measurament> getLastMeasurament(Integer aquariumId);
 
     @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
-    List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
-    List<Object> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3")
     Double getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);

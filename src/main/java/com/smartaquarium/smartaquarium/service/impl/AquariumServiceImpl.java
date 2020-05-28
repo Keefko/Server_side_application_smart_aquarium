@@ -48,6 +48,10 @@ public class AquariumServiceImpl implements AquariumService {
         return aquariumRepository.save(aquarium).getId();
     }
 
+    public Aquarium update(Aquarium aquarium){
+        return aquariumRepository.save(aquarium);
+    }
+
     @Override
     public void deleteById(Integer id) {
         DeleteRequest deleteRequest = new DeleteRequest();

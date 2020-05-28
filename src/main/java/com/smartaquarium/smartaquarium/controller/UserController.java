@@ -69,11 +69,12 @@ public class UserController {
 
         if(user != null){
             List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
+
+            for(Aquarium aquarium : aquariums){
+                aquarium.setUserId(0);
+                aquariumService.update(aquarium);
+            }
             return new ResponseEntity<>(aquariums, HttpStatus.OK);
-//            for(Aquarium aquarium : aquariums){
-//                aquarium.setUserId(0);
-//                aquariumService.add(aquarium);
-//            }
             //userService.deleteById(id);
             //return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
 

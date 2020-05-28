@@ -49,7 +49,7 @@ public class AquariumController {
     @PutMapping
     public ResponseEntity updateAquarium(@RequestBody Aquarium aquarium){
         if(aquariumService.get(aquarium.getId())!= null){
-            aquariumService.add(aquarium);
+            aquariumService.update(aquarium);
             return new ResponseEntity<>(aquarium,HttpStatus.OK);
         }
         return  new ResponseEntity<>("Zadané akvárium neexistuje", HttpStatus.NOT_FOUND);

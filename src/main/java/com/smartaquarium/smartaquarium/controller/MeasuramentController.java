@@ -58,7 +58,7 @@ public class MeasuramentController {
 
     @GetMapping("/ph/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
-        List<MeasuramentGraphData> phs = null;
+        List<Measurament> phs = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
         switch (interval){

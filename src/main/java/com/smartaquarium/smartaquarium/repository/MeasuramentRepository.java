@@ -25,7 +25,7 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     @Query("SELECT m FROM Measurament m WHERE m.aquariumId = ?1 ORDER BY m.createTime DESC")
     List<Measurament> getLastMeasurament(Integer aquariumId);
 
-    @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by hour(create_time)")
+    @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
     List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")

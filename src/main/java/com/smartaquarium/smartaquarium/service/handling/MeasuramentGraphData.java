@@ -1,6 +1,5 @@
 package com.smartaquarium.smartaquarium.service.handling;
 
-
 import java.sql.Timestamp;
 
 public class MeasuramentGraphData {

@@ -27,15 +27,21 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     List<Measurament> getLastMeasurament(Integer aquariumId);
 
     @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
-    List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.ph), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
-    List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<Object> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
 
-    @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3")
-    Double getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);
+    @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
+    List<Object> getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);
 
-    @Query("SELECT AVG(m.orp) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3")
-    int getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to);
+    @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
+    List<Object> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
+
+    @Query("SELECT AVG(m.orp) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
+    List<Object> getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to);
+
+    @Query("SELECT AVG(m.orp) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
+    List<Object> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
 }

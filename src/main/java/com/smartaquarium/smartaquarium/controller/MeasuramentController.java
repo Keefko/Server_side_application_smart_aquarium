@@ -3,17 +3,14 @@ package com.smartaquarium.smartaquarium.controller;
 import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
 
-import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.sql.Timestamp;
-
-import java.time.format.DateTimeFormatter;
-
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -57,7 +54,7 @@ public class MeasuramentController {
 
     @GetMapping("/ph/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
-        List<MeasuramentGraphData> phs = null;
+        List<Object> phs = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
         switch (interval){
@@ -68,8 +65,32 @@ public class MeasuramentController {
                 phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
         }
+        HashMap<String, String> response = new HashMap<>();
+        for(int i=0; i < phs.size(); i++) {
+            Object[] ph = (Object[]) phs.get(i);
+            String value = String.valueOf(ph[0]);
+            String time = String.valueOf(ph[0]);
+            response.put("value", value);
+            response.put("time", time);
+        }
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 
-        return new ResponseEntity(phs, HttpStatus.OK);
+    @GetMapping("/orp/{id}/{from}/{to}/{interval}")
+    public ResponseEntity getAvgOrp(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
+        List<Object> orps = null;
+        Timestamp timeFrom = Timestamp.valueOf(from);
+        Timestamp timeTo = Timestamp.valueOf(to);
+        switch (interval){
+            case "hour":
+                orps = measuramentService.getOrpAvg(id,timeFrom,timeTo);
+                break;
+            case "day":
+                orps = measuramentService.getOrpAvgW(id,timeFrom,timeTo);
+                break;
+        }
+
+        return new ResponseEntity(orps, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -108,4 +129,5 @@ public class MeasuramentController {
         }
         return new ResponseEntity<>("Akvárium s daným id neexistuje", HttpStatus.NOT_FOUND);
     }
+
 }

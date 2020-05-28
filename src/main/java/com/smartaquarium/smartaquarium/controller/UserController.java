@@ -66,18 +66,20 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable int id){
         User user = userService.get(id);
-        if(user == null){
-            return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
+
+        if(user != null){
+            List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
+
+            for(Aquarium aquarium : aquariums){
+                aquarium.setUserId(0);
+                aquariumService.add(aquarium);
+            }
+
+            userService.deleteById(id);
+            return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
+
         }
 
-        List<Aquarium> aquariums = aquariumService.getAllUsersAquariums(id);
-
-        for(Aquarium aquarium : aquariums){
-            aquarium.setUserId(0);
-            aquariumService.add(aquarium);
-        }
-
-        userService.deleteById(id);
-        return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
+        return new ResponseEntity<>("Užívateľ s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
     }
 }

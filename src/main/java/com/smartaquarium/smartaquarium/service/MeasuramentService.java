@@ -17,7 +17,8 @@ public interface MeasuramentService {
     void add(Measurament measurament);
     void deleteById(Integer id);
     void deleteAllByAquariumId(Integer aquariumId);
-    HashMap<Integer,Timestamp> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<Object> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<Object> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
     int getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to, String interval);
     Double getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to, String interval);
 }

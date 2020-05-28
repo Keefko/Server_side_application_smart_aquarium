@@ -75,6 +75,7 @@ public class UserController {
         for(Aquarium aquarium : aquariums){
             aquarium.setUserId(0);
         }
+
         userService.deleteById(id);
         return new ResponseEntity<>(id + ": Užívateľ bol zmazaný", HttpStatus.OK);
     }

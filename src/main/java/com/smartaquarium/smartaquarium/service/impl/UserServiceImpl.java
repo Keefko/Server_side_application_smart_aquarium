@@ -27,8 +27,6 @@ public class UserServiceImpl implements UserService {
         User user = null;
         if(optional.isPresent()){
             user = optional.get();
-        } else {
-            throw new RuntimeException("Nenašiel sa uživateľ s id" + id);
         }
         return user;
     }

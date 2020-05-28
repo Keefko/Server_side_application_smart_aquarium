@@ -17,11 +17,13 @@ public class AquariumServiceImpl implements AquariumService {
 
     private AquariumRepository aquariumRepository;
     private AquariumSettingsService aquariumSettingsService;
+    private DeleteRequest deleteRequest;
 
     @Autowired
-    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService) {
+    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService, DeleteRequest deleteRequest) {
         this.aquariumRepository = aquariumRepository;
         this.aquariumSettingsService = aquariumSettingsService;
+        this.deleteRequest = deleteRequest;
     }
 
 
@@ -54,7 +56,6 @@ public class AquariumServiceImpl implements AquariumService {
 
     @Override
     public void deleteById(Integer id) {
-        DeleteRequest deleteRequest = new DeleteRequest();
         deleteRequest.deleteAquariumConexions(id);
         aquariumRepository.deleteById(id);
     }

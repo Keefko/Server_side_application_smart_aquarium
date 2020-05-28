@@ -3,8 +3,11 @@ package com.smartaquarium.smartaquarium.service.handling;
 
 import com.smartaquarium.smartaquarium.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DeleteRequest {
+
     @Autowired
     private ConnectionRepository connectionRepository;
 

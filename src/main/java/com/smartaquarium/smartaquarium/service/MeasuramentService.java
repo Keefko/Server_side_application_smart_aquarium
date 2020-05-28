@@ -18,8 +18,8 @@ public interface MeasuramentService {
     void add(Measurament measurament);
     void deleteById(Integer id);
     void deleteAllByAquariumId(Integer aquariumId);
-    List<Measurament> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
-    List<Measurament> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvg(Integer aquariumdId, Timestamp from, Timestamp to);
+    List<MeasuramentGraphData> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
     List<Object> getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to);
     List<Object> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
     List<Object> getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);

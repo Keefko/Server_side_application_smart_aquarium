@@ -1,7 +1,6 @@
 package com.smartaquarium.smartaquarium.service;
 
-import com.smartaquarium.smartaquarium.mqtt.MqttCall;
-import com.smartaquarium.smartaquarium.service.MeasuramentService;
+import com.smartaquarium.smartaquarium.MqttControllers.MqttCall;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

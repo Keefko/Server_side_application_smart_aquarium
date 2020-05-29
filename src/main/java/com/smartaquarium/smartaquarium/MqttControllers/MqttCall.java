@@ -1,4 +1,4 @@
-package com.smartaquarium.smartaquarium.mqtt;
+package com.smartaquarium.smartaquarium.MqttControllers;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;

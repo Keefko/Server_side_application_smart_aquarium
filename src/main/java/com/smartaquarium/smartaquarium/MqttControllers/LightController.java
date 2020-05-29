@@ -28,6 +28,7 @@ public class LightController implements Callable<Void> {
 //        Component component = componentService.get();
 //        String topic = componentService.get().getName();
 //        MqttMessage msg = createMessage(component);
+//        msg.setQos(0);
 //        msg.setRetained(true);
 //        client.publish(topic,msg);
         return null;

@@ -90,9 +90,9 @@ public class MeasuramentController {
                 break;
         }
 
-        List<HashMap<String, String>> response = getHashMaps(orps);
+        //List<HashMap<String, String>> response = getHashMaps(orps);
 
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(orps, HttpStatus.OK);
     }
 
     @GetMapping("/temperature/{id}/{from}/{to}/{interval}")
@@ -108,8 +108,8 @@ public class MeasuramentController {
                 temperatures = measuramentService.getThermoAvgW(id,timeFrom,timeTo);
                 break;
         }
-        List<HashMap<String, String>> response = getHashMaps(temperatures);
-        return new ResponseEntity(response, HttpStatus.OK);
+        //List<HashMap<String, String>> response = getHashMaps(temperatures);
+        return new ResponseEntity(temperatures, HttpStatus.OK);
     }
 
     @PostMapping("/add")

@@ -11,12 +11,11 @@ import java.util.concurrent.Callable;
 public class LightController implements Callable<Void> {
 
     private IMqttClient client;
+    private Component component;
 
-    @Autowired
-    private ComponentService componentService;
-
-    public LightController(IMqttClient client) {
+    public LightController(IMqttClient client,Component component) {
         this.client = client;
+        this.component = component;
     }
 
     @Override
@@ -25,8 +24,6 @@ public class LightController implements Callable<Void> {
         if(!client.isConnected()){
             return  null;
         }
-//        Component component = componentService.get();
-//        String topic = componentService.get().getName();
 //        MqttMessage msg = createMessage(component);
 //        msg.setQos(0);
 //        msg.setRetained(true);

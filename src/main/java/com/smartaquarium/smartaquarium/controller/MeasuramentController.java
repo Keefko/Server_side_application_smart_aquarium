@@ -70,7 +70,7 @@ public class MeasuramentController {
                 break;
         }
 
-        //List<HashMap<String, String>> response = getHashMaps(phs);
+        List<HashMap<String, String>> response = getHashMaps(phs);
         return new ResponseEntity(phs, HttpStatus.OK);
     }
 
@@ -78,7 +78,7 @@ public class MeasuramentController {
 
     @GetMapping("/orp/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgOrp(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
-        List<Object> orps = null;
+        List<Object[]> orps = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
         switch (interval){
@@ -97,7 +97,7 @@ public class MeasuramentController {
 
     @GetMapping("/temperature/{id}/{from}/{to}/{interval}")
     public ResponseEntity getAvgThermo(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
-        List<Object> temperatures = null;
+        List<Object[]> temperatures = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
         switch (interval){
@@ -150,11 +150,11 @@ public class MeasuramentController {
     }
 
 
-    private List<HashMap<String, String>> getHashMaps(List<Object> values) {
+    private List<HashMap<String, String>> getHashMaps(List<Object[]> values) {
         HashMap<String, String> map = new HashMap<>();
         List<HashMap<String, String>> response = new ArrayList<>();
         for (int i = 0; i < values.size(); i++) {
-            Object[] ph = (Object[]) values.get(i);
+            Object[] ph = values.get(i);
             String value = String.valueOf(ph[0]);
             String time = String.valueOf(ph[1]);
             map.put("value", value);

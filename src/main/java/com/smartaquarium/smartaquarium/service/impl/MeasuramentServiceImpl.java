@@ -79,22 +79,22 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
-    public List<Object> getOrpAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getOrpAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getOrpAvg(aquariumdId,from,to);
     }
 
     @Override
-    public List<Object> getOrpAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getOrpAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getOrpAvgW(aquariumdId,from,to);
     }
 
     @Override
-    public List<Object> getThermoAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getThermoAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getThermoAvg(aquariumdId,from,to);
     }
 
     @Override
-    public List<Object> getThermoAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
+    public List<Object[]> getThermoAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getThermoAvgW(aquariumdId,from,to);
     }
 

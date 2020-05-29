@@ -33,15 +33,15 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
-    List<Object> getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);
+    List<Object[]> getThermoAvg(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.temperature) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
-    List<Object> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
+    List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.orp) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time), hour(create_time)")
-    List<Object> getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to);
+    List<Object[]> getOrpAvg(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Query("SELECT AVG(m.orp) FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
-    List<Object> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
+    List<Object[]> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
 }

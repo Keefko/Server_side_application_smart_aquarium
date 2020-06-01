@@ -49,9 +49,9 @@ public class ServiceTest {
     @Test
     public void aquarium(){
         Aquarium aquarium = new Aquarium(18645,4,"Akvárium 3");
-        Integer id = aquariumService.add(aquarium);
+        aquariumService.add(aquarium);
         Aquarium aquarium2 = new Aquarium(18845,4,"Akvárium 4");
-        Integer id2 = aquariumService.add(aquarium2);
+        aquariumService.add(aquarium2);
 
         Aquarium aquariumFind = aquariumService.get(15425);
         System.out.println(aquariumFind);

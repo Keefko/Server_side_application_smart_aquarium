@@ -59,6 +59,6 @@ public class MqttService {
     public void getData() throws MqttException {
         String subscriberId = UUID.randomUUID().toString();
         MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(subscriberId,"tcp://147.175.125.215:1883", "vojs","Terror123456."));
-        mqttComponentController.inbound("BaJoP1/4/WQLTP1/1");
+        mqttComponentController.inbound("Jozef");
     }
 }

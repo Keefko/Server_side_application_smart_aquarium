@@ -10,7 +10,7 @@ public interface AquariumService {
 
     List<Aquarium> getAllUsersAquariums(Integer userId);
     Aquarium get(Integer id);
-    Integer add(Aquarium aquarium);
+    Aquarium  add(Aquarium aquarium);
     Aquarium update(Aquarium aquarium);
     void deleteById(Integer id);
 

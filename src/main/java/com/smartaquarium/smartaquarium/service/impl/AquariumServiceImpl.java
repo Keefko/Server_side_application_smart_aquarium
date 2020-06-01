@@ -42,12 +42,13 @@ public class AquariumServiceImpl implements AquariumService {
     }
 
     @Override
-    public Integer add(Aquarium aquarium) {
+    public Aquarium add(Aquarium aquarium) {
         List<Aquarium> aquariums = aquariumRepository.findAllByUserId(aquarium.getUserId());
         aquarium.setName("Aquarium " + aquariums.size());
-//        AquariumSettings aquariumSettings = new AquariumSettings(7,200,20.0, aquarium.getId(), aquarium.getName());
-//        aquariumSettingsService.add(aquariumSettings);
-        return aquariumRepository.save(aquarium).getId();
+        aquariumRepository.save(aquarium);
+        AquariumSettings aquariumSettings = new AquariumSettings(7,200,20.0, aquarium.getId(), aquarium.getName());
+        aquariumSettingsService.add(aquariumSettings);
+        return aquarium;
     }
 
     public Aquarium update(Aquarium aquarium){

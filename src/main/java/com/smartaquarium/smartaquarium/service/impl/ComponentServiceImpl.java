@@ -37,6 +37,11 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
+    public Component getByNameandId(Integer aquariumId, String name) {
+        return componentRepository.getByNameandId(aquariumId,name);
+    }
+
+    @Override
     public void add(Component component) {
         componentRepository.save(component);
     }

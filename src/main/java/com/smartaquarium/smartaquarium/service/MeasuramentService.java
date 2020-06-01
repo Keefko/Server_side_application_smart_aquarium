@@ -1,11 +1,9 @@
 package com.smartaquarium.smartaquarium.service;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
-import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
 
 @Service

@@ -20,4 +20,6 @@ public interface ComponentRepository extends JpaRepository<Component, Integer> {
     @Query("DELETE FROM Component c WHERE c.aquariumId = ?1")
     void deleteByAquariumId(Integer aquariumId);
 
+    @Query("SELECT c FROM Component c WHERE c.aquariumId = ?1 AND c.name = ?2")
+    Component getByNameandId(Integer aquariumId, String name);
 }

@@ -3,7 +3,6 @@ package com.smartaquarium.smartaquarium.service.impl;
 import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.repository.MeasuramentRepository;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
-import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import com.smartaquarium.smartaquarium.service.handling.MeasuramentProccess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

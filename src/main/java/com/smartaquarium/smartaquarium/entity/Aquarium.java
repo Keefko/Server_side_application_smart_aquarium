@@ -23,6 +23,7 @@ public class Aquarium {
     @Column(name = "name")
     private String name;
 
+
     public Aquarium() {
     }
 
@@ -57,7 +58,6 @@ public class Aquarium {
     public void setName(String name) {
         this.name = name;
     }
-
 
     @Override
     public String toString() {

@@ -11,6 +11,7 @@ public interface ComponentService {
 
     List<Component> getAllComponentsByAquariumId(Integer aquariumId);
     Component get(Integer id);
+    Component getByNameandId(Integer aquariumId, String name);
     void add(Component component);
     void deleteById(Integer id);
 

@@ -12,11 +12,6 @@ public class SmartaquariumApplication {
 	public static void main(String[] args) throws MqttException {
 		SpringApplication.run(SmartaquariumApplication.class, args);
 		MqttService mqttService = new MqttService();
-		try {
-			mqttService.inbound("BaJoP1/4/WQLTP1/1");
-		}catch (MqttException me){
-			me.printStackTrace();
-		}
+		mqttService.getData();
 	}
-
 }

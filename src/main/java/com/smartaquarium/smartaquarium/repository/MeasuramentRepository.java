@@ -1,7 +1,6 @@
 package com.smartaquarium.smartaquarium.repository;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
-import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

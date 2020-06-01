@@ -4,9 +4,6 @@ import com.smartaquarium.smartaquarium.entity.Measurament;
 import com.smartaquarium.smartaquarium.service.MeasuramentService;
 
 
-import com.smartaquarium.smartaquarium.service.handling.MeasuramentGraphData;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +65,8 @@ public class MeasuramentController {
             case "day":
                 phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
+            case "week":
+                break;
         }
 
         List<HashMap<String, String>> response = getHashMaps(phs);
@@ -88,6 +87,8 @@ public class MeasuramentController {
             case "day":
                 orps = measuramentService.getOrpAvgW(id,timeFrom,timeTo);
                 break;
+            case "week":
+                break;
         }
 
         List<HashMap<String, String>> response = getHashMaps(orps);
@@ -106,6 +107,8 @@ public class MeasuramentController {
                 break;
             case "day":
                 temperatures = measuramentService.getThermoAvgW(id,timeFrom,timeTo);
+                break;
+            case "week":
                 break;
         }
         List<HashMap<String, String>> response = getHashMaps(temperatures);

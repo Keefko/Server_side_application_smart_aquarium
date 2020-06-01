@@ -45,8 +45,8 @@ public class AquariumServiceImpl implements AquariumService {
     public Integer add(Aquarium aquarium) {
         List<Aquarium> aquariums = aquariumRepository.findAllByUserId(aquarium.getUserId());
         aquarium.setName("Aquarium " + aquariums.size());
-        AquariumSettings aquariumSettings = new AquariumSettings(7,200,20.0, aquarium.getId(), aquarium.getName());
-        aquariumSettingsService.add(aquariumSettings);
+//        AquariumSettings aquariumSettings = new AquariumSettings(7,200,20.0, aquarium.getId(), aquarium.getName());
+//        aquariumSettingsService.add(aquariumSettings);
         return aquariumRepository.save(aquarium).getId();
     }
 

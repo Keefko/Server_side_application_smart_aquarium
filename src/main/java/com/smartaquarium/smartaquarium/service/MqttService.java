@@ -2,7 +2,6 @@ package com.smartaquarium.smartaquarium.service;
 
 import com.smartaquarium.smartaquarium.MqttControllers.MqttCall;
 import com.smartaquarium.smartaquarium.MqttControllers.MqttComponentController;
-import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.Component;
 import org.eclipse.paho.client.mqttv3.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,11 @@ import java.util.UUID;
 @Service
 public class MqttService {
 
-    private MeasuramentService measuramentService;
-    private AquariumService aquariumService;
+    private MqttBrokerService mqttBrokerService;
 
     @Autowired
-    public MqttService(MeasuramentService measuramentService, AquariumService aquariumService){
-        this.measuramentService = measuramentService;
-        this.aquariumService = aquariumService;
+    public MqttService(MqttBrokerService mqttBrokerService){
+        this.mqttBrokerService = mqttBrokerService;
     }
 
     public MqttService() {}
@@ -49,11 +46,12 @@ public class MqttService {
         return mqttConnectOptions;
     }
 
-    public void sendData(Component component) throws Exception {
+    public void sendData(Component component) throws MqttException {
         String publisherId = UUID.randomUUID().toString();
-        Aquarium aquarium = aquariumService.get(component.getAquariumId());
-//        MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(publisherId,aquarium.getBroker(), aquarium.getUsername(), aquarium.getPassword()), component);
-//        mqttComponentController.call();
+        //MqttBroker mqttBroker = mqttBrokerService.getBrokerDataByAquariumId(component.getAquariumId());
+        //MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(publisherId,mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
+        MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(publisherId,"tcp://147.175.125.215:1883", "vojs", "Terror123456."));
+        mqttComponentController.outbound(component);
     }
 
     public void getData() throws MqttException {

@@ -1,19 +1,19 @@
 package com.smartaquarium.smartaquarium.MqttControllers;
 
 import com.smartaquarium.smartaquarium.entity.Component;
+import com.smartaquarium.smartaquarium.entity.Measurament;
+import com.smartaquarium.smartaquarium.service.MeasuramentService;
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.concurrent.Callable;
-
 @Service
-public class MqttComponentController implements Callable<Void> {
+public class MqttComponentController {
 
     private IMqttClient client;
-    private Component component;
 
     public MqttComponentController(IMqttClient client) {
         this.client = client;
@@ -22,25 +22,30 @@ public class MqttComponentController implements Callable<Void> {
     public MqttComponentController() {
     }
 
-    @Override
-    public Void call() throws Exception {
 
-        if(!client.isConnected()){
-            return  null;
-        }
+    public void outbound(Component component) throws MqttException {
+
         MqttMessage msg = createMessage(component);
         msg.setQos(0);
         msg.setRetained(true);
-        client.publish(component.getTopic(),msg);
-        return null;
+        try {
+            client.publish(component.getTopic(), msg);
+        }catch (MqttException me){
+            me.printStackTrace();
+        }
+
     }
 
     public void inbound(final String topic) throws MqttException {
-        client.subscribe(topic);
+        try {
+            client.subscribe(topic);
+        } catch (MqttException me){
+            me.printStackTrace();
+        }
     }
 
     private MqttMessage createMessage(Component component){
-        byte[] payload = String.format("%d,%d,%s,%o,%d", component.getId(), component.getAquariumId(), component.getName(),component.getTurnOn(),component.getCyklus()).getBytes();
+        byte[] payload = String.format("%d %d %s %b %d", component.getId(), component.getAquariumId(), component.getName(),component.getTurnOn(),component.getCyklus()).getBytes();
         return new MqttMessage(payload);
     }
 

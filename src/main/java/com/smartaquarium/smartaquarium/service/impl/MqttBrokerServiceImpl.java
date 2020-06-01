@@ -6,6 +6,8 @@ import com.smartaquarium.smartaquarium.service.MqttBrokerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MqttBrokerServiceImpl implements MqttBrokerService {
 
@@ -19,6 +21,16 @@ public class MqttBrokerServiceImpl implements MqttBrokerService {
     @Override
     public MqttBroker getBrokerDataByAquariumId(Integer aquariumId) {
         return mqttBrokerRepository.getBrokerDataByAquariumId(aquariumId);
+    }
+
+    @Override
+    public MqttBroker get(Integer id) {
+        Optional<MqttBroker> optional = mqttBrokerRepository.findById(id);
+        MqttBroker mqttBroker = null;
+        if(optional.isPresent()){
+            mqttBroker = optional.get();
+        }
+        return mqttBroker;
     }
 
     @Override

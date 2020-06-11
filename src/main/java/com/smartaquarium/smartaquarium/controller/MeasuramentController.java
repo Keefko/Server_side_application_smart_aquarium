@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("measurament")
@@ -54,7 +54,7 @@ public class MeasuramentController {
     }
 
     @GetMapping("/ph/{id}/{from}/{to}/{interval}")
-    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
+    public ResponseEntity getAvgPh(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval) throws ParseException {
         List<Object[]> phs = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
@@ -63,20 +63,21 @@ public class MeasuramentController {
                 phs = measuramentService.getPhAvg(id,timeFrom,timeTo);
                 break;
             case "day":
-                phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
+                phs = measuramentService.getPhAvgD(id,timeFrom,timeTo);
                 break;
             case "week":
+                phs = measuramentService.getPhAvgW(id,timeFrom,timeTo);
                 break;
         }
 
-        List<HashMap<String, String>> response = getHashMaps(phs);
+        List<HashMap<String, String>> response = getHashMaps(phs,interval);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
 
 
     @GetMapping("/orp/{id}/{from}/{to}/{interval}")
-    public ResponseEntity getAvgOrp(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
+    public ResponseEntity getAvgOrp(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval) throws ParseException {
         List<Object[]> orps = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
@@ -85,19 +86,20 @@ public class MeasuramentController {
                 orps = measuramentService.getOrpAvg(id,timeFrom,timeTo);
                 break;
             case "day":
-                orps = measuramentService.getOrpAvgW(id,timeFrom,timeTo);
+                orps = measuramentService.getOrpAvgD(id,timeFrom,timeTo);
                 break;
             case "week":
+                orps = measuramentService.getOrpAvgW(id,timeFrom,timeTo);
                 break;
         }
 
-        List<HashMap<String, String>> response = getHashMaps(orps);
+        List<HashMap<String, String>> response = getHashMaps(orps,interval);
 
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @GetMapping("/temperature/{id}/{from}/{to}/{interval}")
-    public ResponseEntity getAvgThermo(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval){
+    public ResponseEntity getAvgThermo(@PathVariable Integer id,@PathVariable String from, @PathVariable String to,@PathVariable String interval) throws ParseException {
         List<Object[]> temperatures = null;
         Timestamp timeFrom = Timestamp.valueOf(from);
         Timestamp timeTo = Timestamp.valueOf(to);
@@ -106,12 +108,13 @@ public class MeasuramentController {
                 temperatures = measuramentService.getThermoAvg(id,timeFrom,timeTo);
                 break;
             case "day":
-                temperatures = measuramentService.getThermoAvgW(id,timeFrom,timeTo);
+                temperatures = measuramentService.getThermoAvgD(id,timeFrom,timeTo);
                 break;
             case "week":
+                temperatures = measuramentService.getThermoAvgW(id,timeFrom,timeTo);
                 break;
         }
-        List<HashMap<String, String>> response = getHashMaps(temperatures);
+        List<HashMap<String, String>> response = getHashMaps(temperatures, interval);
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -153,16 +156,44 @@ public class MeasuramentController {
     }
 
 
-    private List<HashMap<String, String>> getHashMaps(List<Object[]> values) {
+    private List<HashMap<String, String>> getHashMaps(List<Object[]> values, String interval) throws ParseException {
         HashMap<String, String> map = new HashMap<>();
         List<HashMap<String, String>> response = new ArrayList<>();
+        SimpleDateFormat simpleDateFormat = null;
+        Date newDate = null;
+        SimpleDateFormat sdf = null;
         for (int i = 0; i < values.size(); i++) {
             String value = String.valueOf(values.get(i)[0]);
             String time = String.valueOf(values.get(i)[1]);
-            map.put("value", value);
-            map.put("time", time);
-            response.add(map);
+            switch(interval){
+                case "hour":
+                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    newDate = simpleDateFormat.parse(time);
+                    sdf= new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
+                    response.add(response(map,sdf, value, newDate));
+                    break;
+                case "day" :
+                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    newDate = simpleDateFormat.parse(time);
+                    sdf= new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+                    response.add(response(map,sdf, value,newDate));
+                    break;
+                case "week" :
+                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    newDate = simpleDateFormat.parse(time);
+                    sdf= new SimpleDateFormat("", Locale.getDefault());
+                    response.add(response(map,sdf, value,newDate));
+                    break;
+            }
+
         }
         return response;
+    }
+
+    private HashMap<String, String> response(HashMap<String, String> map, SimpleDateFormat sdf, String value, Date newDate) {
+        String date = sdf.format(newDate);
+        map.put("value", value);
+        map.put("time", date);
+        return map;
     }
 }

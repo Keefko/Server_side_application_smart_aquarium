@@ -27,6 +27,9 @@ public class LoginController {
     public ResponseEntity userLoggedIn(@PathVariable String login, @PathVariable String password ){
         BcryptGenerator bcryptGenerator = new BcryptGenerator();
         User user = userRepository.getUserByLogin(login);
+        if(user == null){
+            return new ResponseEntity<>("Zadaní užívateľ neexistuje", HttpStatus.NOT_FOUND);
+        }
         if(bcryptGenerator.isPasswordMatch(password,user.getPassword())){
             return new ResponseEntity<>(user, HttpStatus.OK);
         }

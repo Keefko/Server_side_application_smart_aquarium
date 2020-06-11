@@ -73,6 +73,11 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
+    public List<Object[]> getPhAvgD(Integer aquariumdId, Timestamp from, Timestamp to) {
+        return measuramentRepository.getPhAvgD(aquariumdId,from,to);
+    }
+
+    @Override
     public List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getPhAvgW(aquariumdId,from,to);
     }
@@ -83,6 +88,11 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     }
 
     @Override
+    public List<Object[]> getOrpAvgD(Integer aquariumdId, Timestamp from, Timestamp to) {
+        return measuramentRepository.getOrpAvgD(aquariumdId,from,to);
+    }
+
+    @Override
     public List<Object[]> getOrpAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getOrpAvgW(aquariumdId,from,to);
     }
@@ -90,6 +100,11 @@ public class MeasuramentServiceImpl implements MeasuramentService {
     @Override
     public List<Object[]> getThermoAvg(Integer aquariumdId, Timestamp from, Timestamp to) {
         return measuramentRepository.getThermoAvg(aquariumdId,from,to);
+    }
+
+    @Override
+    public List<Object[]> getThermoAvgD(Integer aquariumdId, Timestamp from, Timestamp to) {
+        return measuramentRepository.getThermoAvgD(aquariumdId,from,to);
     }
 
     @Override

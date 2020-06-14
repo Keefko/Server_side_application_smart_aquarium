@@ -45,17 +45,17 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT CONCAT(WEEK(create_time) - WEEK(DATE_SUB(create_time, INTERVAL DAYOFMONTH(create_time) - 1 DAY ))+1, '/' ,MONTH(create_time),' ', YEAR(create_time)) as con, ROUND(AVG(temperature),2) as value FROM heroku_651b634aa63afee.measurament WHERE aquarium_id = '15425' AND create_time BETWEEN '2020-05-04 20:18:04' AND '2020-05-06 20:18:04' GROUP BY WEEK(create_time)", nativeQuery = true)
+    @Query(value = "SELECT CONCAT(WEEK(create_time) - WEEK(DATE_SUB(create_time, INTERVAL DAYOFMONTH(create_time) - 1 DAY ))+1, '/' ,MONTH(create_time),' ', YEAR(create_time)) as con, ROUND(AVG(temperature),2) as value FROM heroku_651b634aa63afee.measurament WHERE aquarium_id = ?1 AND create_time BETWEEN ?2 AND ?3 GROUP BY WEEK(create_time)", nativeQuery = true)
     List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1,MONTH(m.createTime), YEAR(m.createTime)), ROUND(AVG(m.orp),2) FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)",nativeQuery = true)
+    @Query(value = "SELECT CONCAT(WEEK(create_time) - WEEK(DATE_SUB(create_time, INTERVAL DAYOFMONTH(create_time) - 1 DAY ))+1, '/' ,MONTH(create_time),' ', YEAR(create_time)) as con, ROUND(AVG(orp),2) as value FROM heroku_651b634aa63afee.measurament WHERE aquarium_id = ?1 AND create_time BETWEEN ?2 AND ?3 GROUP BY WEEK(create_time)", nativeQuery = true)
     List<Object[]> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1,MONTH(m.createTime),YEAR(m.createTime)), ROUND(AVG(m.ph),2) FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)", nativeQuery = true)
+    @Query(value = "SELECT CONCAT(WEEK(create_time) - WEEK(DATE_SUB(create_time, INTERVAL DAYOFMONTH(create_time) - 1 DAY ))+1, '/' ,MONTH(create_time),' ', YEAR(create_time)) as con, ROUND(AVG(ph),2) as value FROM heroku_651b634aa63afee.measurament WHERE aquarium_id = ?1 AND create_time BETWEEN ?2 AND ?3 GROUP BY WEEK(create_time)", nativeQuery = true)
     List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
 
 

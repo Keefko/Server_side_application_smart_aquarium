@@ -43,21 +43,15 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     @Query("SELECT AVG(m.orp), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
     List<Object[]> getOrpAvgD(Integer aquariumdId,Timestamp from, Timestamp to);
 
-//
-//    @Query("SELECT CONCAT((WEEK(m.createTime)- WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1), '/', MONTH(m.createTime),' ', YEAR(m.createTime) ) as date, \n" +
-//            "                ROUND( AVG(m.temperature),2) as value FROM Measurament m" +
-//            "                 WHERE aquarium_id = ?1 AND time BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
-//    List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
-//
-//    @Query("SELECT CONCAT((WEEK(m.createTime)- WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1), '/', MONTH(m.createTime),' ', YEAR(m.createTime) ) as date, \n" +
-//            "                ROUND( AVG(m.orp),2) as value FROM Measurament m" +
-//            "                 WHERE aquarium_id = ?1 AND time BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
-//    List<Object[]> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
-//
-//    @Query("SELECT CONCAT((WEEK(m.createTime)- WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1), '/', MONTH(m.createTime),' ', YEAR(m.createTime) ) as date, \n" +
-//            "                ROUND( AVG(m.ph),2) as value FROM Measurament m" +
-//            "                 WHERE aquarium_id = ?1 AND time BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
-//    List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
+
+    @Query("SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1, '/' ,MONTH(m.createTime),' ', YEAR(m.createTime)) as con, ROUND(AVG(m.temperature),2) as value FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
+    List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
+
+    @Query("SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1, '/' ,MONTH(m.createTime),' ', YEAR(m.createTime)) as con, ROUND(AVG(m.orp),2) as value FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
+    List<Object[]> getOrpAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
+
+    @Query("SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1, '/' ,MONTH(m.createTime),' ', YEAR(m.createTime)) as con, ROUND(AVG(m.ph),2) as value FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
+    List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to);
 
 
 }

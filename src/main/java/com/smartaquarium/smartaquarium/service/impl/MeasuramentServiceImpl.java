@@ -79,8 +79,8 @@ public class MeasuramentServiceImpl implements MeasuramentService {
 
     @Override
     public List<Object[]> getPhAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
-        //return measuramentRepository.getPhAvgW(aquariumdId,from,to);
-        return null;
+        return measuramentRepository.getPhAvgW(aquariumdId,from,to);
+
     }
 
     @Override
@@ -95,8 +95,8 @@ public class MeasuramentServiceImpl implements MeasuramentService {
 
     @Override
     public List<Object[]> getOrpAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
-        //return measuramentRepository.getOrpAvgW(aquariumdId,from,to);
-        return null;
+        return measuramentRepository.getOrpAvgW(aquariumdId,from,to);
+
     }
 
     @Override
@@ -111,8 +111,7 @@ public class MeasuramentServiceImpl implements MeasuramentService {
 
     @Override
     public List<Object[]> getThermoAvgW(Integer aquariumdId, Timestamp from, Timestamp to) {
-        return null;
-        //return measuramentRepository.getThermoAvgW(aquariumdId,from,to);
+        return measuramentRepository.getThermoAvgW(aquariumdId,from,to);
     }
 
 }

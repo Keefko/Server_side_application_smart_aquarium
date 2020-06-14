@@ -45,7 +45,7 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT CONCAT(WEEK(m.createTime)) FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)", nativeQuery = true)
+    @Query("SELECT CONCAT(WEEK(m.createTime), m.ph) as con FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)")
     List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 
     @Modifying

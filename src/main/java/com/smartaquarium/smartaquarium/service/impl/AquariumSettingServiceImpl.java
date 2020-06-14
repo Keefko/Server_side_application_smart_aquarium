@@ -1,8 +1,10 @@
 package com.smartaquarium.smartaquarium.service.impl;
 
 
+import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.AquariumSettings;
 import com.smartaquarium.smartaquarium.repository.AquariumSettingsRepository;
+import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ import java.util.Optional;
 public class AquariumSettingServiceImpl implements AquariumSettingsService {
 
     private AquariumSettingsRepository aquariumSettingsRepository;
+    private AquariumService aquariumService;
 
     @Autowired
-    public AquariumSettingServiceImpl(AquariumSettingsRepository aquariumSettingsRepository) {
+    public AquariumSettingServiceImpl(AquariumSettingsRepository aquariumSettingsRepository, AquariumService aquariumService) {
         this.aquariumSettingsRepository = aquariumSettingsRepository;
+        this.aquariumService = aquariumService;
     }
 
     @Override
@@ -40,6 +44,13 @@ public class AquariumSettingServiceImpl implements AquariumSettingsService {
     @Override
     public AquariumSettings getSettingByAquariumId(Integer aquariumId) {
         return aquariumSettingsRepository.getSettingByAquariumId(aquariumId);
+    }
+
+    @Override
+    public AquariumSettings update(AquariumSettings aquariumSettings) {
+        Aquarium aquarium = aquariumService.get(aquariumSettings.getAquariumId());
+        aquariumService.add(aquarium);
+        return aquariumSettingsRepository.save(aquariumSettings);
     }
 
     @Override

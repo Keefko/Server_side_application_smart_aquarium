@@ -51,7 +51,7 @@ public class AquariumSettingsController {
     public ResponseEntity  updateSettings(@RequestBody AquariumSettings aquariumSettings){
         AquariumSettings aquariumSettings1 = aquariumSettingsService.get(aquariumSettings.getId());
         if(aquariumSettings1 != null) {
-            aquariumSettingsService.add(aquariumSettings);
+            aquariumSettingsService.update(aquariumSettings);
             return  new ResponseEntity<>(aquariumSettings, HttpStatus.OK);
         }
         return new ResponseEntity<>("Zadané nástavenie neexistuje", HttpStatus.NOT_FOUND);

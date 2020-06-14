@@ -12,5 +12,6 @@ public interface AquariumSettingsService {
     AquariumSettings get(Integer id);
     void add(AquariumSettings aquariumSettings);
     AquariumSettings getSettingByAquariumId(Integer aquariumId);
+    AquariumSettings update(AquariumSettings aquariumSettings);
     void deleteById(Integer id);
 }

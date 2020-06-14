@@ -115,7 +115,7 @@ public class MeasuramentController {
                 break;
         }
         List<HashMap<String, String>> response = getHashMaps(temperatures, interval);
-        return new ResponseEntity(temperatures, HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -179,8 +179,8 @@ public class MeasuramentController {
                     response.add(response(map,sdf, value,newDate));
                     break;
                 case "week" :
-                    map.put("value", value);
-                    map.put("time", time);
+                    map.put("value", time);
+                    map.put("time", value);
                     response.add(map);
                     break;
             }

@@ -43,7 +43,6 @@ public interface MeasuramentRepository extends JpaRepository<Measurament, Intege
     @Query("SELECT AVG(m.orp), m.createTime FROM Measurament m WHERE m.aquariumId = ?1 AND m.createTime BETWEEN ?2 AND ?3 group by date(create_time)")
     List<Object[]> getOrpAvgD(Integer aquariumdId,Timestamp from, Timestamp to);
 
-
     @Query(value = "SELECT CONCAT(WEEK(m.createTime) - WEEK(DATE_SUB(m.createTime, INTERVAL DAYOFMONTH(m.createTime) - 1 DAY ))+1,MONTH(m.createTime), YEAR(m.createTime)) as con, ROUND(AVG(m.temperature),2) as value FROM Measurament m WHERE m.aquarium_id = ?1 AND m.createTime BETWEEN ?2 AND ?3 GROUP BY WEEK(m.createTime)", nativeQuery = true)
     List<Object[]> getThermoAvgW(Integer aquariumdId,Timestamp from, Timestamp to);
 

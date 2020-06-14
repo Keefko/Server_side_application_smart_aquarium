@@ -179,10 +179,9 @@ public class MeasuramentController {
                     response.add(response(map,sdf, value,newDate));
                     break;
                 case "week" :
-                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-                    newDate = simpleDateFormat.parse(time);
-                    sdf= new SimpleDateFormat("", Locale.getDefault());
-                    response.add(response(map,sdf, value,newDate));
+                    map.put("value", value);
+                    map.put("time", time);
+                    response.add(map);
                     break;
             }
 

@@ -21,7 +21,6 @@ public class MqttComponentController {
     public MqttComponentController() {
     }
 
-
     public void outbound(Component component) throws MqttException {
 
         MqttMessage msg = createMessage(component);

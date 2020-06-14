@@ -115,7 +115,7 @@ public class MeasuramentController {
                 break;
         }
         List<HashMap<String, String>> response = getHashMaps(temperatures, interval);
-        return new ResponseEntity(response, HttpStatus.OK);
+        return new ResponseEntity(temperatures, HttpStatus.OK);
     }
 
     @PostMapping("/add")

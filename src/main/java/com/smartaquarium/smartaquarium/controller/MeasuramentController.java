@@ -167,13 +167,13 @@ public class MeasuramentController {
             String time = String.valueOf(values.get(i)[1]);
             switch(interval){
                 case "hour":
-                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     newDate = simpleDateFormat.parse(time);
                     sdf= new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
                     response.add(response(map,sdf, value, newDate));
                     break;
                 case "day" :
-                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+                    simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                     newDate = simpleDateFormat.parse(time);
                     sdf= new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
                     response.add(response(map,sdf, value,newDate));

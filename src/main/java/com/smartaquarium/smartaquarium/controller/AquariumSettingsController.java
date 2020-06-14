@@ -48,10 +48,10 @@ public class AquariumSettingsController {
     }
 
     @PutMapping
-    public ResponseEntity  updateSettings(@RequestBody AquariumSettings aquariumSettings){
+    public ResponseEntity updateSettings(@RequestBody AquariumSettings aquariumSettings){
         AquariumSettings aquariumSettings1 = aquariumSettingsService.get(aquariumSettings.getId());
         if(aquariumSettings1 != null) {
-            aquariumSettingsService.update(aquariumSettings);
+            aquariumSettingsService.add(aquariumSettings);
             return  new ResponseEntity<>(aquariumSettings, HttpStatus.OK);
         }
         return new ResponseEntity<>("Zadané nástavenie neexistuje", HttpStatus.NOT_FOUND);

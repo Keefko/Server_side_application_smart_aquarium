@@ -57,15 +57,6 @@ public class AquariumServiceImpl implements AquariumService {
         return aquarium;
     }
 
-    public Aquarium update(Aquarium aquarium){
-        AquariumSettings aquariumSettings = aquariumSettingsService.getSettingByAquariumId(aquarium.getId());
-        if(!aquariumSettings.getName().equals(aquarium.getName())){
-            aquariumSettings.setName(aquarium.getName());
-            aquariumSettingsService.add(aquariumSettings);
-        }
-        return aquariumRepository.save(aquarium);
-    }
-
     @Override
     public void deleteById(Integer id) {
         deleteRequest.deleteAquariumConexions(id);

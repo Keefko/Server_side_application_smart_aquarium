@@ -8,7 +8,6 @@ import java.util.List;
 @Service
 public interface AquariumSettingsService {
 
-
     AquariumSettings get(Integer id);
     void add(AquariumSettings aquariumSettings);
     AquariumSettings getSettingByAquariumId(Integer aquariumId);

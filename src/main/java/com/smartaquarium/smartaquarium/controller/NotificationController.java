@@ -1,13 +1,17 @@
 package com.smartaquarium.smartaquarium.controller;
 
 
+import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.Notification;
+import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -16,16 +20,23 @@ import java.util.List;
 public class NotificationController {
 
     private NotificationService notificationService;
-
+    private AquariumService aquariumService;
     @Autowired
-    public NotificationController(NotificationService notificationService) {
+    public NotificationController(NotificationService notificationService, AquariumService aquariumService) {
         this.notificationService = notificationService;
+        this.aquariumService = aquariumService;
     }
 
     @GetMapping
     public List<Notification> getUserNotifications(){
         return  notificationService.getUserNotifications();
     }
+
+    @GetMapping("/aqaurium/{id}")
+    public List<Notification> getAquariumNotifications(@PathVariable Integer id){
+        return notificationService.getAquariumNotifications(id);
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable int id){

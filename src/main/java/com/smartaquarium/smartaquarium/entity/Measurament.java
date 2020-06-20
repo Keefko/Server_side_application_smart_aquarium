@@ -52,6 +52,10 @@ public class Measurament {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @NonNull
     public Integer getAquariumId() {
         return aquariumId;

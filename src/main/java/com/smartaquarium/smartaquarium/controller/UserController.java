@@ -72,7 +72,7 @@ public class UserController {
 
             for(Aquarium aquarium : aquariums){
                 aquarium.setUserId(1);
-                aquariumService.update(aquarium);
+                aquariumService.add(aquarium);
             }
 
             userService.deleteById(id);

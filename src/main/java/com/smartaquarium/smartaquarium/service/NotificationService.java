@@ -9,6 +9,7 @@ import java.util.List;
 public interface NotificationService {
 
     List<Notification> getUserNotifications();
+    List<Notification> getAquariumNotifications(Integer aquariumId);
     Notification get(int id);
     Notification getAquariumNotificationByProperty(Integer aquariumId, String property);
     Integer add(Notification notification);

@@ -25,6 +25,10 @@ public class MeasuramentProccess {
         this.connectionService = connectionService;
     }
 
+    public MeasuramentProccess() {
+
+    }
+
     @NonNull
     public void measuramentControl(Measurament measurament){
         AquariumSettings aquariumSettings = aquariumSettingsService.getSettingByAquariumId(measurament.getAquariumId());
@@ -86,8 +90,16 @@ public class MeasuramentProccess {
         } else {
             text ="Hladina " + property + " klesla pod hranicu o " + Math.abs(value);
         }
-        Notification notification = new Notification(measurament.getAquariumId(), property, text, true);
-        notificationRepository.save(notification);
+        AquariumSettings aquariumSettings = aquariumSettingsService.getSettingByAquariumId(measurament.getAquariumId());
+        Notification notification = notificationRepository.getAquariumNotificationByProperty(measurament.getAquariumId(), property);
+        if(notification == null) {
+            Notification newNotification = new Notification(measurament.getAquariumId(), property, text, true, aquariumSettings.getName());
+            notificationRepository.save(newNotification);
+        } else {
+            notification.setText(text);
+            notificationRepository.save(notification);
+        }
+
     }
 
 

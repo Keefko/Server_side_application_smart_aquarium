@@ -11,7 +11,6 @@ public interface AquariumService {
     List<Aquarium> getAllUsersAquariums(Integer userId);
     Aquarium get(Integer id);
     Aquarium  add(Aquarium aquarium);
-    Aquarium update(Aquarium aquarium);
     void deleteById(Integer id);
 
 }

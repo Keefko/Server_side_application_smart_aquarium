@@ -25,6 +25,11 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
+    public List<Notification> getAquariumNotifications(Integer id) {
+        return notificationRepository.getAquariumNotifications(id);
+    }
+
+    @Override
     public Notification get(int id) {
         Optional<Notification> optional = notificationRepository.findById(id);
         Notification notification = null;

@@ -3,6 +3,8 @@ package com.smartaquarium.smartaquarium.controller;
 
 import com.smartaquarium.smartaquarium.entity.Component;
 import com.smartaquarium.smartaquarium.service.ComponentService;
+import com.smartaquarium.smartaquarium.service.MqttService;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,12 @@ import java.util.List;
 public class ComponentController {
 
     private ComponentService componentService;
+    private MqttService mqttService;
 
     @Autowired
-    public ComponentController(ComponentService componentService) {
+    public ComponentController(ComponentService componentService, MqttService mqttService) {
         this.componentService = componentService;
+        this.mqttService = mqttService;
     }
 
     @GetMapping("/aquarium/{id}")
@@ -45,10 +49,11 @@ public class ComponentController {
     }
 
     @PutMapping
-    public ResponseEntity  updateComponent(@RequestBody Component component){
+    public ResponseEntity  updateComponent(@RequestBody Component component) throws MqttException {
         Component component1 = componentService.get(component.getId());
         if(component1 != null){
             componentService.add(component);
+            mqttService.sendData(component);
             return new ResponseEntity<>(component, HttpStatus.OK);
         }
         return new ResponseEntity<>("Ovládací prvok neexistuje", HttpStatus.NOT_FOUND);

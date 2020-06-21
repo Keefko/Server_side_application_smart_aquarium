@@ -1,7 +1,5 @@
 package com.smartaquarium.smartaquarium.controller;
 
-
-import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.Notification;
 import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.NotificationService;
@@ -10,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -58,7 +54,11 @@ public class NotificationController {
 
     @PutMapping
     public ResponseEntity update(Notification notification){
-        return new ResponseEntity<>("Hello", HttpStatus.OK);
+        Notification notification1 = notificationService.get(notification.getId());
+        if(notification1 != null) {
+            return new ResponseEntity<>("Hello", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Notifikácia neexistuje", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")

@@ -20,8 +20,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Notification> getUserNotifications() {
-        return notificationRepository.findAll();
+    public List<Object[]> getUserNotifications(Integer id) {
+        return notificationRepository.getUserNotifications(id);
     }
 
     @Override

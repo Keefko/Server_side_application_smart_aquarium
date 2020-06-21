@@ -18,6 +18,11 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 
     @Transactional
     @Modifying
+    @Query(value = "SELECT * FROM heroku_651b634aa63afee.notification JOIN heroku_651b634aa63afee.aquarium ON user_id = ?1 where visible = 1 ", nativeQuery = true)
+    List<Object[]> getUserNotifications(Integer id);
+
+    @Transactional
+    @Modifying
     @Query("DELETE FROM Notification n WHERE n.aquariumId = ?1")
     void deleteByAquariumId(Integer aquariumId);
 }

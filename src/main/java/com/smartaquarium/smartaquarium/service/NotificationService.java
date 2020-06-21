@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface NotificationService {
 
-    List<Notification> getUserNotifications();
+    List<Object[]> getUserNotifications(Integer id);
     List<Notification> getAquariumNotifications(Integer aquariumId);
     Notification get(int id);
     Notification getAquariumNotificationByProperty(Integer aquariumId, String property);

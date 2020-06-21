@@ -35,8 +35,6 @@ public class NotificationServiceImpl implements NotificationService {
         Notification notification = null;
         if(optional.isPresent()){
             notification = optional.get();
-        } else {
-            throw new RuntimeException("Notifikácia s id" + id + "neexistuje");
         }
         return notification;
     }

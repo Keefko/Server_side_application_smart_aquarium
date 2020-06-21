@@ -28,21 +28,8 @@ public class NotificationController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity getUserNotifications(@PathVariable int id){
-        List<Object[]> notifications = notificationService.getUserNotifications(id);
-        HashMap<String, String> map = new HashMap<>();
-        List<HashMap<String, String>> response = new ArrayList<>();
-
-        for(int i = 0; i < notifications.size(); i++){
-            map.put("id", String.valueOf(notifications.get(i)[0]));
-            map.put("aquariumId",String.valueOf(notifications.get(i)[1]));
-            map.put("property",String.valueOf(notifications.get(i)[2]));
-            map.put("text",String.valueOf(notifications.get(i)[3]));
-            map.put("visible",String.valueOf(notifications.get(i)[4]));
-            map.put("name",String.valueOf(notifications.get(i)[5]));
-            response.add(map);
-        }
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public List<Notification>  getUserNotifications(@PathVariable int id){
+        return notificationService.getUserNotifications(id);
     }
 
     @GetMapping("/aquarium/{id}")

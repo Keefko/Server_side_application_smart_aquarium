@@ -18,8 +18,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 
     @Transactional
     @Modifying
-    @Query(value = "SELECT * FROM heroku_651b634aa63afee.notification JOIN heroku_651b634aa63afee.aquarium ON user_id = ?1 where visible = 1 ", nativeQuery = true)
-    List<Object[]> getUserNotifications(Integer id);
+    @Query(value = "SELECT notification.id, notification.aquarium_id, notification.property, notification.text,notification.visible, notification.name FROM heroku_651b634aa63afee.notification as notification JOIN heroku_651b634aa63afee.aquarium as aquarium ON aquarium.aquarium_id = notification.aquarium_id where aquarium.user_id = ?1 AND visible = 1", nativeQuery = true)
+    List<Notification> getUserNotifications(Integer id);
 
     @Transactional
     @Modifying

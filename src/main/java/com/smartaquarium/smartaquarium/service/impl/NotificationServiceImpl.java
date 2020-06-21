@@ -20,7 +20,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public List<Object[]> getUserNotifications(Integer id) {
+    public List<Notification> getUserNotifications(Integer id) {
         return notificationRepository.getUserNotifications(id);
     }
 

@@ -34,6 +34,15 @@ public class ComponentController {
         return componentService.getAllComponentsByAquariumId(id);
     }
 
+    @GetMapping("/aquarium/{id}/{name}")
+    public ResponseEntity get(@PathVariable Integer id, @PathVariable String name){
+        Component component = componentService.getByNameandId(id,name);
+        if(component != null){
+            return new ResponseEntity<>(component, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Ovládací prvok s id" + id + "neexistuje", HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable Integer id){
         Component component = componentService.get(id);

@@ -59,8 +59,8 @@ public class NotificationController {
     public ResponseEntity update(Notification notification){
         Notification notification1 = notificationService.get(notification.getId());
         if(notification1 != null){
-            notificationService.add(notification);
-            return new ResponseEntity<>(notification, HttpStatus.OK);
+            Integer id = notificationService.add(notification);
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
         return new ResponseEntity<>("Notifikácia neexistuje", HttpStatus.NOT_FOUND);
     }

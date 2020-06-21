@@ -53,8 +53,12 @@ public class NotificationController {
     }
 
     @PutMapping
-    public ResponseEntity update(Notification notification){
+    public ResponseEntity update(@RequestBody Notification notification){
         Notification notification1 = notificationService.get(notification.getId());
+        if(notification1 != null){
+            notificationService.add(notification);
+            return new ResponseEntity<>(notification, HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>("Notifikácia neexistuje", HttpStatus.NOT_FOUND);
     }
 

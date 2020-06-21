@@ -2,10 +2,12 @@ package com.smartaquarium.smartaquarium.service.impl;
 
 import com.smartaquarium.smartaquarium.entity.Aquarium;
 import com.smartaquarium.smartaquarium.entity.AquariumSettings;
+import com.smartaquarium.smartaquarium.entity.Connection;
 import com.smartaquarium.smartaquarium.entity.MqttBroker;
 import com.smartaquarium.smartaquarium.repository.AquariumRepository;
 import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
+import com.smartaquarium.smartaquarium.service.ConnectionService;
 import com.smartaquarium.smartaquarium.service.MqttBrokerService;
 import com.smartaquarium.smartaquarium.service.handling.DeleteRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +23,15 @@ public class AquariumServiceImpl implements AquariumService {
     private AquariumSettingsService aquariumSettingsService;
     private MqttBrokerService mqttBrokerService;
     private DeleteRequest deleteRequest;
+    private ConnectionService connectionService;
 
     @Autowired
-    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService, MqttBrokerService mqttBrokerService, DeleteRequest deleteRequest) {
+    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService, MqttBrokerService mqttBrokerService, DeleteRequest deleteRequest, ConnectionService connectionService) {
         this.aquariumRepository = aquariumRepository;
         this.aquariumSettingsService = aquariumSettingsService;
         this.mqttBrokerService = mqttBrokerService;
         this.deleteRequest = deleteRequest;
+        this.connectionService = connectionService;
     }
 
 
@@ -52,6 +56,8 @@ public class AquariumServiceImpl implements AquariumService {
         aquariumRepository.save(aquarium);
         AquariumSettings aquariumSettings = new AquariumSettings(7,200,20.0, aquarium.getId(), aquarium.getName());
         aquariumSettingsService.add(aquariumSettings);
+        Connection connection = new Connection(aquarium.getId(),false,false,false,false,false,false);
+        connectionService.add(connection);
         MqttBroker mqttBroker = new MqttBroker(aquarium.getId(),"none", "none", "none");
         mqttBrokerService.add(mqttBroker);
         return aquarium;

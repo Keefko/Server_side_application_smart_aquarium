@@ -2,7 +2,9 @@ package com.smartaquarium.smartaquarium.controller;
 
 
 import com.smartaquarium.smartaquarium.entity.Component;
+import com.smartaquarium.smartaquarium.entity.Connection;
 import com.smartaquarium.smartaquarium.service.ComponentService;
+import com.smartaquarium.smartaquarium.service.ConnectionService;
 import com.smartaquarium.smartaquarium.service.MqttService;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,14 @@ public class ComponentController {
 
     private ComponentService componentService;
     private MqttService mqttService;
+    private ConnectionService connectionService;
+
 
     @Autowired
-    public ComponentController(ComponentService componentService, MqttService mqttService) {
+    public ComponentController(ComponentService componentService, MqttService mqttService, ConnectionService connectionService) {
         this.componentService = componentService;
         this.mqttService = mqttService;
+        this.connectionService = connectionService;
     }
 
     @GetMapping("/aquarium/{id}")
@@ -43,6 +48,19 @@ public class ComponentController {
         Component component1 = componentService.get(component.getId());
         if(component1 == null) {
             componentService.add(component);
+            Connection connection = connectionService.getByAquariumId(component.getAquariumId());
+            if("light".equals(component.getName())){
+                connection.setLight(true);
+            }
+
+            if("thermometer".equals(component.getName())){
+                connection.setThermometer(true);
+            }
+
+            if("feeding".equals(component.getName())){
+                connection.setFeeding(true);
+            }
+            connectionService.add(connection);
             return new ResponseEntity(component, HttpStatus.OK);
         }
         return new ResponseEntity<>("Ovládací prvok už existuje", HttpStatus.BAD_REQUEST);

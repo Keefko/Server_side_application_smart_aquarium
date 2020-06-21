@@ -30,7 +30,7 @@ public class NotificationController {
         return  notificationService.getUserNotifications();
     }
 
-    @GetMapping("/aqaurium/{id}")
+    @GetMapping("/aquarium/{id}")
     public List<Notification> getAquariumNotifications(@PathVariable int id){
         return notificationService.getAquariumNotifications(id);
     }

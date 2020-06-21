@@ -45,8 +45,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public Integer add(Notification notification) {
-        return notificationRepository.save(notification).getId();
+    public void add(Notification notification) {
+        notificationRepository.save(notification);
     }
 
     @Override

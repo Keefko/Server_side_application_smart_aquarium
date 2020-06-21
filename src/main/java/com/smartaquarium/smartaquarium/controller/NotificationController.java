@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -33,7 +31,7 @@ public class NotificationController {
     }
 
     @GetMapping("/aqaurium/{id}")
-    public List<Notification> getAquariumNotifications(@PathVariable Integer id){
+    public List<Notification> getAquariumNotifications(@PathVariable int id){
         return notificationService.getAquariumNotifications(id);
     }
 

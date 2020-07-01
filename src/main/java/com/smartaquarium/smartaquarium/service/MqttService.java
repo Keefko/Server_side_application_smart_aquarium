@@ -54,10 +54,10 @@ public class MqttService {
         mqttComponentController.outbound(component);
     }
 
-    public void getData(Component component) throws MqttException {
+    public void getData(Integer id, String topic) throws MqttException {
         String subscriberId = UUID.randomUUID().toString();
-        MqttBroker mqttBroker = mqttBrokerService.getBrokerDataByAquariumId(component.getAquariumId());
+        MqttBroker mqttBroker = mqttBrokerService.getBrokerDataByAquariumId(id);
         MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(subscriberId,mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
-        mqttComponentController.inbound(component.getTopic());
+        mqttComponentController.inbound(topic);
     }
 }

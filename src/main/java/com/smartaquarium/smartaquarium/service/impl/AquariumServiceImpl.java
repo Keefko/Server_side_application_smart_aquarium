@@ -5,6 +5,7 @@ import com.smartaquarium.smartaquarium.entity.AquariumSettings;
 import com.smartaquarium.smartaquarium.entity.Connection;
 import com.smartaquarium.smartaquarium.entity.MqttBroker;
 import com.smartaquarium.smartaquarium.repository.AquariumRepository;
+import com.smartaquarium.smartaquarium.repository.MqttBrokerRepository;
 import com.smartaquarium.smartaquarium.service.AquariumService;
 import com.smartaquarium.smartaquarium.service.AquariumSettingsService;
 import com.smartaquarium.smartaquarium.service.ConnectionService;
@@ -24,14 +25,16 @@ public class AquariumServiceImpl implements AquariumService {
     private MqttBrokerService mqttBrokerService;
     private DeleteRequest deleteRequest;
     private ConnectionService connectionService;
+    private MqttBrokerRepository mqttBrokerRepository;
 
     @Autowired
-    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService, MqttBrokerService mqttBrokerService, DeleteRequest deleteRequest, ConnectionService connectionService) {
+    public AquariumServiceImpl(AquariumRepository aquariumRepository, AquariumSettingsService aquariumSettingsService, MqttBrokerService mqttBrokerService, DeleteRequest deleteRequest, ConnectionService connectionService, MqttBrokerRepository mqttBrokerRepository) {
         this.aquariumRepository = aquariumRepository;
         this.aquariumSettingsService = aquariumSettingsService;
         this.mqttBrokerService = mqttBrokerService;
         this.deleteRequest = deleteRequest;
         this.connectionService = connectionService;
+        this.mqttBrokerRepository = mqttBrokerRepository;
     }
 
 
@@ -68,5 +71,6 @@ public class AquariumServiceImpl implements AquariumService {
         deleteRequest.deleteAquariumConexions(id);
         aquariumRepository.deleteById(id);
     }
+
 }
 

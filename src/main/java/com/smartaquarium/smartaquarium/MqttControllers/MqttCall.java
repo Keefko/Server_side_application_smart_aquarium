@@ -38,7 +38,7 @@ public class MqttCall implements MqttCallback {
         int ph = Integer.parseInt(data[1]);
         int orp = Integer.parseInt(data[2]);
         Double temperature = Double.parseDouble(data[7]);
-        Measurament measurament = new Measurament(92451,ph,orp,temperature,timestamp);
+        Measurament measurament = new Measurament(15425,ph,orp,temperature,timestamp);
         measuramentProccess.measuramentControl(measurament);
         measuramentService.add(measurament);
     }

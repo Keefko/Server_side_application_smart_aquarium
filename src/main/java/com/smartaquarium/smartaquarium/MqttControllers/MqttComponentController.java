@@ -1,8 +1,6 @@
 package com.smartaquarium.smartaquarium.MqttControllers;
 
 import com.smartaquarium.smartaquarium.entity.Component;
-import com.smartaquarium.smartaquarium.entity.Measurament;
-import com.smartaquarium.smartaquarium.service.MeasuramentService;
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -21,7 +19,7 @@ public class MqttComponentController {
     public MqttComponentController() {
     }
 
-    public void outbound(Component component) throws MqttException {
+    public void outbound(Component component) {
 
         MqttMessage msg = createMessage(component);
         msg.setQos(0);
@@ -34,7 +32,7 @@ public class MqttComponentController {
 
     }
 
-    public void inbound(final String topic) throws MqttException {
+    public void inbound(final String topic) {
         try {
             client.subscribe(topic);
         } catch (MqttException me){

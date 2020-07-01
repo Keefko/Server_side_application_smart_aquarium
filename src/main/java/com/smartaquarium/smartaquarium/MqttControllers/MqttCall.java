@@ -1,6 +1,7 @@
 package com.smartaquarium.smartaquarium.MqttControllers;
 
 import com.smartaquarium.smartaquarium.entity.Measurament;
+import com.smartaquarium.smartaquarium.service.MeasuramentService;
 import com.smartaquarium.smartaquarium.service.handling.MeasuramentProccess;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -16,7 +17,7 @@ import java.sql.Timestamp;
 public class MqttCall implements MqttCallback {
 
     private MeasuramentProccess measuramentProccess;
-
+    private MeasuramentService measuramentService;
     @Autowired
     public MqttCall(MeasuramentProccess measuramentProccess) {
         this.measuramentProccess = measuramentProccess;
@@ -39,6 +40,7 @@ public class MqttCall implements MqttCallback {
         Double temperature = Double.parseDouble(data[7]);
         Measurament measurament = new Measurament(92451,ph,orp,temperature,timestamp);
         measuramentProccess.measuramentControl(measurament);
+        measuramentService.add(measurament);
     }
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken){

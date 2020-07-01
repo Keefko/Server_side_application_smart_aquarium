@@ -15,19 +15,12 @@ import java.util.List;
 @Component
 public class ScheduledTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-
     @Autowired
     MqttService mqttService;
 
-    @Autowired
-    AquariumRepository aquariumRepository;
 
-    @Scheduled(fixedRate = 60*60*1000)
+    @Scheduled(fixedRate = 4000)
     public void reportCurrentTime() throws MqttException {
-        List<Aquarium> aquariums = aquariumRepository.findAll();
-        for(Aquarium aquarium : aquariums){
-            mqttService.getData(aquarium.getId(), "senzors");
-        }
+        mqttService.getData(15425, "BaJoP1/4/WQLTP1/1");
     }
 }

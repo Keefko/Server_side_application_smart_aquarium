@@ -50,14 +50,18 @@ public class MqttService {
     public void sendData(Component component) throws MqttException {
         String publisherId = UUID.randomUUID().toString();
         MqttBroker mqttBroker = mqttBrokerService.getBrokerDataByAquariumId(component.getAquariumId());
-        MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(publisherId,mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
-        mqttComponentController.outbound(component);
+        if(!mqttBroker.getBrokerUrl().equals("none")) {
+            MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(publisherId, mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
+            mqttComponentController.outbound(component);
+        }
     }
 
     public void getData(Integer id, String topic) throws MqttException {
         String subscriberId = UUID.randomUUID().toString();
         MqttBroker mqttBroker = mqttBrokerService.getBrokerDataByAquariumId(id);
-        MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(subscriberId,mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
-        mqttComponentController.inbound(topic);
+        if(!mqttBroker.getBrokerUrl().equals("none")) {
+            MqttComponentController mqttComponentController = new MqttComponentController(mqttClient(subscriberId, mqttBroker.getBrokerUrl(), mqttBroker.getUsername(), mqttBroker.getPassword()));
+            mqttComponentController.inbound(topic);
+        }
     }
 }
